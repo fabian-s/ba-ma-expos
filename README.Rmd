@@ -49,7 +49,7 @@ their addition and multiplication are well defined, enabling simple summary stat
 A thesis on this topic would
 
 - summarize the necessary theoretic background and literature
-- implement functionality for `tf` and  `tidyfun` that represents density data and performs arithmetic operations as well as basic statistics in Bayes space,
+- implement functionality for `tf` and  `tidyfun` that represents density data and performs arithmetic operations as well as basic statistics in Bayes space (e.g. also implement suitable ZB-Splines, see (Skorna et al (2024))[https://arxiv.org/pdf/2405.11615])
 - apply this to an interesting real-world data set (or: replicate a published analysis in this context with the new implementation).
 
 ### Topics: Write `tidyfun` scripts for Craniceanu et al's "Functional Data Analysis with R" / Ramsay et als's "Functional Data Analysis with R and MATLAB"
