@@ -2,12 +2,17 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
+Last update: 2024-09-24
+
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
 interested in one of these BA or MA thesis topics or if you want to
-discuss related ideas of your own.
-
-Last update: 2024-03-26
+discuss (related) ideas of your own.  
+For BA theses, we would keep the focus on refactoring, evaluating and
+describing existing implementations and/or applying them to real data,
+for MA theses either novel developments with detailed theory along with
+clean and performant implementations would be expected, or challenging
+analyses of more complex data sets with advanced methods.
 
 # Topic Area: Improving `tidyfun` and related packages
 
@@ -15,12 +20,7 @@ Last update: 2024-03-26
 functional data analysis currently under development. Some of the issues
 tracked on Github for this and its underlying infrastructure package
 [`tf`](https://github.com/tidyfun/tf) could also be good topics for
-theses.  
-For BA theses, we would keep the focus on
-refactoring/evaluating/describing existing implementations or applying
-those to real data, for MA more novel developments and detailed theory
-along with clean and performant implementations would be expected as
-well.
+theses.
 
 ### Topic: Implementing and comparing quantile methods for functional data (BA/MA)
 
@@ -35,47 +35,27 @@ documenting and validating (most of) the methods in the
 [`rainbow`](https://cran.r-project.org/web/packages/rainbow/index.html)
 package integrated into / as an add-on package for `tf` & `tidyfun`.
 
+<!-- 
 ### Topic: Implementing and comparing registration/alignment methods (BA/MA)
+&#10;Functional data contains both vertical (amplitude - how large is the peak/valley) and horizontal (phase - where is the peak/valley) variability. The latter requires more sophisticated mathematical theory and complex algorithms to deal with. Potential tasks here include:
+&#10;- defining & implementing additional data structures, classes & methods to represent & visualize aligned functions along with their corresponding warping functions
+- writing glue code for using registration packages like [fdasrvf](https://github.com/jdtuck/fdasrvf_R), [registr](https://github.com/julia-wrobel/registr), [DTW](https://cran.r-project.org/web/packages/dtw/index.html) methods with `tf` vectors  
+- ... or (re-)implementing (simpler) alignment methods (like `fda`'s landmark alignment or alignment based on FPC 1 ("continuous registration"))
+- implementation of summary statistics, visualizations, diagnostics etc for the results of registration/alignment procedures
+&#10;Stretch goals here include implementing methods for noisy and/or sparse and/or non-Gaussian/discrete functional data and accommodating functional fragments/unequal domains with functions of different observed lengths.
+Excellent review of (mostly) SRVF framework: [Wu et al (2023, ch. 3 f)](https://link.springer.com/article/10.1007/s11749-023-00876-9) 
+-->
 
-Functional data contains both vertical (amplitude - how large is the
-peak/valley) and horizontal (phase - where is the peak/valley)
-variability. The latter requires more sophisticated mathematical theory
-and complex algorithms to deal with. Potential tasks here include:
+### Topic: Implementing multivariate functions in `tf` (MA, maybe BA)
 
-- defining & implementing additional data structures, classes & methods
-  to represent & visualize aligned functions along with their
-  corresponding warping functions
-- writing glue code for using registration packages like
-  [fdasrvf](https://github.com/jdtuck/fdasrvf_R),
-  [registr](https://github.com/julia-wrobel/registr),
-  [DTW](https://cran.r-project.org/web/packages/dtw/index.html) methods
-  with `tf` vectors  
-- … or (re-)implementing (simpler) alignment methods (like `fda`’s
-  landmark alignment or alignment based on FPC 1 (“continuous
-  registration”))
-- implementation of summary statistics, visualizations, diagnostics etc
-  for the results of registration/alignment procedures
+Extend `tf`-classes and methods for multivariate functions with vector
+outputs: $f:\mathbb R \to \mathbb R^d$ for $d>1$.
 
-Stretch goals here include implementing methods for noisy and/or sparse
-and/or non-Gaussian/discrete functional data and accommodating
-functional fragments/unequal domains with functions of different
-observed lengths. Excellent review of (mostly) SRVF framework: [Wu et al
-(2023, ch. 3
-f)](https://link.springer.com/article/10.1007/s11749-023-00876-9)
-
-### Topic: Implementing multivariate functions & scalar fields (MA, maybe BA)
-
-Extend `tf`-classes and methods for
-
-- multivarate functions with vector outputs
-  ($f:\mathbb R \to \mathbb R^d$ for $d>1$)
-- scalar fields ($f:\mathbb R^q \to \mathbb R$ for $q>1$)
-
-This is a large SWE task - scope would probably be one of the above,
-limited to either extending `tfd` or `tfb`, and may require major
+This is a large SWE task - scope would probably be limited to extending
+either the `tfd` or `tfb` classes, and may require some major
 refactoring of `tf` to make such an extension work smoothly and
-consistently (e.g. it probably requires definining new classes and logic
-for `arg`-“vectors” and function `domain`s).
+consistently (e.g. it probably requires defining new classes and logic
+for function `domain`s).
 
 ### Topic: Representation and computation for probability densities in Bayes space (BA, maybe MA)
 
@@ -117,29 +97,48 @@ document / as vignettes for `tidyfun`.
 Books: [Craniceanu et al. (2024)](https://functionaldataanalysis.org/),
 [Ramsay et al. (2009)](https://dx.doi.org/10.1007/978-0-387-98185-7)
 
+<!-- 
 # Topic: Registration based on Peak-Persistence Diagrams (MA, BA very maybe)
-
-Summarize, implement & evaluate SRVF-based function registration using
-the peak-persistence diagrams of [Kim, Dasgupta, Srivastava
-(2023)](https://arxiv.org/pdf/2305.04826.pdf). This topic would involve
-some more advanced and interesting maths and algorithms like
-differential geometry, topology, dynamic programming optimization. The
-paper to implement is bleeding edge state of the art, so this makes an
-excellent topic for people considering a PhD and looking for a thesis
-topic that might turn into something publishable. Potential tasks would
-include:
-
-- summarizing the maths behind these methods
-- implementation of the algorithms and visualizations from the paper in
-  R, preferably using infrastructure of / integrated into `tf`/`tidyfun`
+&#10;Summarize, implement & evaluate SRVF-based function registration using the peak-persistence diagrams of [Kim, Dasgupta, Srivastava (2023)](https://arxiv.org/pdf/2305.04826.pdf). 
+This topic would involve some more advanced and interesting maths and algorithms like differential geometry, topology, dynamic programming optimization. The paper to implement is bleeding edge state of the art, so this makes an excellent topic for people considering a PhD and looking for a thesis topic that might turn into something publishable. Potential tasks would include:
+&#10;- summarizing the maths behind these methods
+- implementation of the algorithms and visualizations from the paper in R, preferably using infrastructure of / integrated into  `tf`/`tidyfun`
 - benchmarking against other registration approaches available in R
-- application to real world datasets (e.g. mouse brain stem audiograms,
-  bodyweight fitness movement patterns, …)
+- application to real world datasets (e.g. mouse brain stem audiograms, bodyweight fitness movement patterns, ...)
+&#10;Stretch goals would include extending this to either non-Gaussian/discrete functional data or accommodating functional fragments/unequal domains with functions of different observed lengths, based on ideas we'd develop together.
+-->
 
-Stretch goals would include extending this to either
-non-Gaussian/discrete functional data or accommodating functional
-fragments/unequal domains with functions of different observed lengths,
-based on ideas we’d develop together.
+# Topic: Functional Data Representation with Merge Trees (MA)
+
+[Pegoraro & Secchi (2023)](https://arxiv.org/pdf/2108.13147) develop
+representations of (noisy, heterogenous) functional data that are
+invariant to misalignment, i.e. representations that are suitable for
+comparing and analyzing the shapes of unregistered curves while
+discarding even fairly complex phase variability. In this thesis, you
+would summarize the relevant mathematical background, implement the
+techniques from the paper in `R` & evaluate them on some data.  
+This topic involves quite advanced and interesting mathematics from
+topology, metric spaces, and graph theory as well as differential
+geometry. The paper to implement is state of the art, so this makes an
+excellent topic for people considering staying in academia and looking
+for a thesis topic that might turn into something publishable,
+especially if any of the stretch goals below become part of the thesis.
+
+Tasks would include:
+
+- summarizing/explaining the maths behind the method
+- re-implementing the algorithms and visualizations from the paper in
+  `R`, preferably using infrastructure of / integrated into
+  `tf`/`tidyfun`
+- benchmarking against similar approaches available in `R`
+- evaluation of the performance on real world datasets (e.g. mouse brain
+  stem audiograms, bodyweight fitness movement patterns, story arc data,
+  …)
+
+Stretch goals could include developing a variant of [Kim, Dasgupta,
+Srivastava (2023)](https://arxiv.org/pdf/2305.04826.pdf) based on merge
+trees instead of peak persistence diagrams or accommodating functional
+fragments/unequal domains with functions of different observed lengths.
 
 # Topic Area: Improving `manifun` (BA/MA)
 
@@ -166,9 +165,12 @@ Thesis goals could include:
 - Re-implementing `EmbedIt` based on more performant software like D3.js
   or refactoring it for better responsiveness etc
 - Adding interactive 3D visualizations
-- Implementing the “grand tour” and other classic multivariate
-  exploration tools (c.f. [`tourr`](https://ggobi.github.io/tourr/))
+- Implementing a “grand tour” and other classic multivariate exploration
+  tools (c.f. [`tourr`](https://ggobi.github.io/tourr/))
 - Adding pre-processing and embedding steps to the existing app
+- Writing up interesting case studies based on real world datasets
+  (e.g. mouse brain stem audiograms, bodyweight fitness movement
+  patterns, story arc data, …)
 
 # Topic Area: (FDA) Outlier Detection
 
@@ -257,9 +259,9 @@ are too high-dimensional, see below). Possible approaches:
 
 ### Topic: Multivariate Functional Outlier Visualization and Detection (BA)
 
-Replicate simulation study and application examples of [Aléman-Gomez et
-al. (2021)](https://onlinelibrary.wiley.com/doi/pdf/10.1002/sim.9342)
-with [our geometric-topological
+Replicate the simulation study and application examples of [Aléman-Gomez
+et al. (2021)](https://onlinelibrary.wiley.com/doi/pdf/10.1002/sim.9342)
+based on a less arbitrary [geometrical-topological
 approach](https://arxiv.org/pdf/2109.06849) and compare results.
 
 # Topic Area: Cluster Analysis
