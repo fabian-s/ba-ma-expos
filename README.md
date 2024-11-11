@@ -91,23 +91,23 @@ probability-density-valued data – i.e. the unit of observation is
 represented by an entire probability distribution, not a single value,
 and the inferential goal is typically to understand how other covariates
 are associated with changes in these distributions. This has many
-interesting applications, for example see [Meier et al,
-(2021)](https://arxiv.org/abs/2110.11771) for differential effects of
-family formation on gender-specific income distributions in East and
-West Germany or [(Menafoglio et al,
-2021)](https://doi.org/10.1016/j.spasta.2021.100494) for an application
-to groundwater monitoring.  
+interesting applications, for example see [Meier et
+al. (2021)](https://arxiv.org/abs/2110.11771) for differential effects
+of family formation on gender-specific income distributions in East and
+West Germany or [Menafoglio et
+al. (2021)](https://doi.org/10.1016/j.spasta.2021.100494) for an
+application to groundwater monitoring.  
 A thesis on this topic would
 
 - summarize the necessary theoretic background and literature
 - implement functionality for `tf` and `tidyfun` that represents density
   data and performs arithmetic operations as well as basic statistics in
-  Bayes space (e.g. also implement suitable ZB-Splines, see (Skorna et
-  al (2024))\[<https://arxiv.org/pdf/2405.11615>\])
+  Bayes space (e.g. also implement suitable ZB-Splines, see [Skorna et
+  al (2024)](https://arxiv.org/pdf/2405.11615)
 - apply this to an interesting real-world data set (or: replicate a
   published analysis in this context with the new implementation).
 
-### Topics: Write `tidyfun` scripts for Craniceanu et al’s “Functional Data Analysis with R” / Ramsay et als’s “Functional Data Analysis with R and MATLAB”
+### Topics: Write `tidyfun` scripts for Craniceanu et al’s “Functional Data Analysis with R” / Ramsay et als’s “Functional Data Analysis with R and MATLAB” (BA)
 
 Both of these books contain many chapters, data sets and case studies
 that could also be done (mostly) using `tidyfun` and/or `refund`.  

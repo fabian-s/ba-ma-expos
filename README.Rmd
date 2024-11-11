@@ -55,14 +55,14 @@ This is a large SWE task - scope would probably be limited to extending either t
 
 The *Bayes Space* paradigm developed by v.d. Boogart, Hron, Egozcue and others
 (e.g. [v.d. Boogart et al. (2014)](https://onlinelibrary.wiley.com/doi/abs/10.1111/anzs.12074), [Hron et al. (2016)](https://doi.org/10.1016/j.csda.2015.07.007)) provides a way to represent probability measures so that
-their addition and multiplication are well defined, enabling simple summary statistics (means etc) as well as methods such as PCA or linear regression for probability-density-valued data -- i.e. the unit of observation is represented by an entire probability distribution, not a single value, and the inferential goal is typically to understand how other covariates are associated with changes in these distributions. This has many interesting applications, for example see [Meier et al, (2021)](https://arxiv.org/abs/2110.11771) for differential effects of family formation on gender-specific income distributions in East and West Germany or [(Menafoglio et al, 2021)](https://doi.org/10.1016/j.spasta.2021.100494) for an application to groundwater monitoring.  
+their addition and multiplication are well defined, enabling simple summary statistics (means etc) as well as methods such as PCA or linear regression for probability-density-valued data -- i.e. the unit of observation is represented by an entire probability distribution, not a single value, and the inferential goal is typically to understand how other covariates are associated with changes in these distributions. This has many interesting applications, for example see [Meier et al.  (2021)](https://arxiv.org/abs/2110.11771) for differential effects of family formation on gender-specific income distributions in East and West Germany or [Menafoglio et al. (2021)](https://doi.org/10.1016/j.spasta.2021.100494) for an application to groundwater monitoring.  
 A thesis on this topic would
 
 - summarize the necessary theoretic background and literature
-- implement functionality for `tf` and  `tidyfun` that represents density data and performs arithmetic operations as well as basic statistics in Bayes space (e.g. also implement suitable ZB-Splines, see (Skorna et al (2024))[https://arxiv.org/pdf/2405.11615])
+- implement functionality for `tf` and  `tidyfun` that represents density data and performs arithmetic operations as well as basic statistics in Bayes space (e.g. also implement suitable ZB-Splines, see [Skorna et al (2024)](https://arxiv.org/pdf/2405.11615)
 - apply this to an interesting real-world data set (or: replicate a published analysis in this context with the new implementation).
 
-### Topics: Write `tidyfun` scripts for Craniceanu et al's "Functional Data Analysis with R" / Ramsay et als's "Functional Data Analysis with R and MATLAB"
+### Topics: Write `tidyfun` scripts for Craniceanu et al's "Functional Data Analysis with R" / Ramsay et als's "Functional Data Analysis with R and MATLAB" (BA)
 
 Both of these books contain many chapters, data sets and case studies that could also be done (mostly) using `tidyfun`  and/or `refund`.  
 We'll select some of them, you'll identify and implement missing functionality in `tidyfun` with my help, and write them up with all the necessary theoretical background and some extensions, in an online document / as vignettes for `tidyfun`.
