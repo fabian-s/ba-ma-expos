@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2024-09-24
+Last update: 2024-11-11
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -21,6 +21,27 @@ functional data analysis currently under development. Some of the issues
 tracked on Github for this and its underlying infrastructure package
 [`tf`](https://github.com/tidyfun/tf) could also be good topics for
 theses.
+
+### Topic: Implementing and comparing functional principal component-based representations for functional data (BA/MA)
+
+Functional data $x_i(t)$ can be represented very efficiently in terms of
+their eigenfunctions (*functional principal components*: FPCs), but this
+requires estimating the auto-covariance function
+$\text{Cov}(x_i(t), x_i(t'))$ from potentially noisy and/or partially
+missing data. The functional data literature contains a multitude of
+proposals on how to do so.  
+In this topic you will survey the different techniques, (re-)implement
+some of them for use in `tf` (or: write glue code to integrate existing
+implementations into `tf`), and compare their performance in an
+extensive benchmark study on real and synthetic data sets.
+
+The topic is suitable for a wide range of programming skills and
+scientific ambitions. If both are high, this topic can even be extended
+to something that could result in a publication, especially if extended
+to FPC representations for non-Gaussian data like [Dey et al.,
+2024](https://doi.org/10.1002/sim.10240), or to NN-based covariance
+estimators like [Sarkar et al.,
+2022](https://doi.org/10.1111/rssb.12551).
 
 ### Topic: Implementing and comparing quantile methods for functional data (BA/MA)
 
@@ -81,7 +102,8 @@ A thesis on this topic would
 - summarize the necessary theoretic background and literature
 - implement functionality for `tf` and `tidyfun` that represents density
   data and performs arithmetic operations as well as basic statistics in
-  Bayes space,
+  Bayes space (e.g. also implement suitable ZB-Splines, see (Skorna et
+  al (2024))\[<https://arxiv.org/pdf/2405.11615>\])
 - apply this to an interesting real-world data set (or: replicate a
   published analysis in this context with the new implementation).
 
@@ -307,6 +329,19 @@ setting and tasks include the following:
   infer the structure of data set
 
 # Topic Area: Regression Models with/for functional data
+
+## Simultaneous, auto-correlation-corrected confidence bands for functional regression coefficients (BA, MA possible with some extensions)
+
+Confidence intervals for `refund`’s functional regression models
+estimated by `pffr` rely on very restrictive assumptions about model
+residuals and are only valid point-wise, not simultaneously across the
+function. Therefore, they are inappropriate in many applications and
+tend to yield over-optimistic results.  
+For this thesis, you would implement [Liebl & Reimherr’s
+(2020)](https://link.springer.com/chapter/10.1007/978-3-030-47756-1_21)
+proposal for fast and fair simultaneous CIs for `pffr`-fits and compare
+its operating characteristics to bootstrap-based and conventional
+alternatives.
 
 ## Refactoring `refund::pffr` & `refund::pfr` (MA)
 
