@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2024-11-11
+Last update: 2025-05-12
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -20,7 +20,9 @@ analyses of more complex data sets with advanced methods.
 functional data analysis currently under development. Some of the issues
 tracked on Github for this and its underlying infrastructure package
 [`tf`](https://github.com/tidyfun/tf) could also be good topics for
-theses.
+theses could also be good topics for theses: see
+[here](https://github.com/tidyfun/tf/issues) or
+[here](https://github.com/tidyfun/tidyfun/issues).
 
 ### Topic: Implementing and comparing functional principal component-based representations for functional data (BA/MA)
 
@@ -30,10 +32,11 @@ requires estimating the auto-covariance function
 $\text{Cov}(x_i(t), x_i(t'))$ from potentially noisy and/or partially
 missing data. The functional data literature contains a multitude of
 proposals on how to do so.  
-In this topic you will survey the different techniques, (re-)implement
-some of them for use in `tf` (or: write glue code to integrate existing
-implementations into `tf`), and compare their performance in an
-extensive benchmark study on real and synthetic data sets.
+In this topic you will identify and describe the most important
+different algorithms, (re-)implement some of them for use in `tf` (or:
+write glue code to integrate existing implementations into `tf`), and
+compare their performance in an extensive benchmark study on real and
+synthetic data sets.
 
 The topic is suitable for a wide range of programming skills and
 scientific ambitions. If both are high, this topic can even be extended
@@ -107,18 +110,12 @@ A thesis on this topic would
 - apply this to an interesting real-world data set (or: replicate a
   published analysis in this context with the new implementation).
 
-### Topics: Write `tidyfun` scripts for Craniceanu et al’s “Functional Data Analysis with R” / Ramsay et als’s “Functional Data Analysis with R and MATLAB” (BA)
-
-Both of these books contain many chapters, data sets and case studies
-that could also be done (mostly) using `tidyfun` and/or `refund`.  
-We’ll select some of them, you’ll identify and implement missing
-functionality in `tidyfun` with my help, and write them up with all the
-necessary theoretical background and some extensions, in an online
-document / as vignettes for `tidyfun`.
-
-Books: [Craniceanu et al. (2024)](https://functionaldataanalysis.org/),
-[Ramsay et al. (2009)](https://dx.doi.org/10.1007/978-0-387-98185-7)
-
+<!--
+### Topics: Write `tidyfun` scripts for Craniceanu et al's "Functional Data Analysis with R" / Ramsay et als's "Functional Data Analysis with R and MATLAB" (BA)
+&#10;Both of these books contain many chapters, data sets and case studies that could also be done (mostly) using `tidyfun`  and/or `refund`.  
+We'll select some of them, you'll identify and implement missing functionality in `tidyfun` with my help, and write them up with all the necessary theoretical background and some extensions, in an online document / as vignettes for `tidyfun`.
+&#10;Books: [Craniceanu et al. (2024)](https://functionaldataanalysis.org/), [Ramsay et al. (2009)](https://dx.doi.org/10.1007/978-0-387-98185-7)
+-->
 <!-- 
 # Topic: Registration based on Peak-Persistence Diagrams (MA, BA very maybe)
 &#10;Summarize, implement & evaluate SRVF-based function registration using the peak-persistence diagrams of [Kim, Dasgupta, Srivastava (2023)](https://arxiv.org/pdf/2305.04826.pdf). 
@@ -203,30 +200,13 @@ Mouse Clinic (e.g. [auditory brain stem response
 curves](https://zenodo.org/records/5779876)) or with (partners of)
 Prof. Christian Müller’s group at the Institute of Statistics.
 
+<!-- 
 ### Topic: Realistic functional outlier benchmark datasets (BA)
-
-Realistic evaluation of outlier detection should use real datasets with
-real outliers. Usually, this is done by selecting all majority class
-observations from a labeled dataset and contaminating them with a few
-randomly sampled instances from other minority classes. This approach
-yields “false” negatives/positives unless the minority class is really
-sufficiently and consistently different from the majority class
-observations. The goal of this project is to investigate under which
-circumstances this “unless” applies by comparing two approaches:
-
-- use only datasets from the `mlr-fda` classification benchmark
-  ([pdf](https://arxiv.org/pdf/1911.07511.pdf)) that were predicted very
-  accurately to generate outlier detection benchmark data
-- for the generated benchmark datasets, use detailed observation-level
-  `mlr-fda` benchmark results to pick only those minority (and maybe
-  also majority?) class observations that were consistently labeled
-  correctly
-
-Additionally, we are interested in how these results are affected by
-measures of dataset structure like separability (
-[pdf](https://arxiv.org/pdf/2109.05180.pdf)) and intrinsic
-dimensionality ([pdf](https://arxiv.org/pdf/2109.02596.pdf),
-[CRAN](https://cran.r-project.org/web/packages/intrinsicDimension/index.html)).
+&#10;Realistic evaluation of outlier detection should use real datasets with real outliers. Usually, this is done by selecting all majority class observations from a labeled dataset and contaminating them with a few randomly sampled instances from other minority classes. This approach yields "false" negatives/positives unless the minority class is really sufficiently and consistently different from the majority class observations. The goal of this project is to investigate under which circumstances this "unless" applies by comparing two approaches:
+&#10;-   use only datasets from the `mlr-fda` classification benchmark ([pdf](https://arxiv.org/pdf/1911.07511.pdf)) that were predicted very accurately to generate outlier detection benchmark data
+-   for the generated benchmark datasets, use detailed observation-level `mlr-fda` benchmark results to pick only those minority (and maybe also majority?) class observations that were consistently labeled correctly
+&#10;Additionally, we are interested in how these results are affected by measures of dataset structure like separability ( [pdf](https://arxiv.org/pdf/2109.05180.pdf)) and intrinsic dimensionality ([pdf](https://arxiv.org/pdf/2109.02596.pdf), [CRAN](https://cran.r-project.org/web/packages/intrinsicDimension/index.html)).
+-->
 
 ### Topic: Implementing the AUMVC framework (MA)
 
