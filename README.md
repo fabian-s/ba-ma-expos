@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2025-05-12
+Last update: 2025-05-19
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -127,7 +127,7 @@ This topic would involve some more advanced and interesting maths and algorithms
 &#10;Stretch goals would include extending this to either non-Gaussian/discrete functional data or accommodating functional fragments/unequal domains with functions of different observed lengths, based on ideas we'd develop together.
 -->
 
-# Topic: Functional Data Representation with Merge Trees (MA)
+## Topic: Functional Data Representation with Merge Trees (MA)
 
 [Pegoraro & Secchi (2023)](https://arxiv.org/pdf/2108.13147) develop
 representations of (noisy, heterogenous) functional data that are
@@ -158,6 +158,18 @@ Stretch goals could include developing a variant of [Kim, Dasgupta,
 Srivastava (2023)](https://arxiv.org/pdf/2305.04826.pdf) based on merge
 trees instead of peak persistence diagrams or accommodating functional
 fragments/unequal domains with functions of different observed lengths.
+
+## Topic: Testing for missingness patterns in incomplete functional data (BA)
+
+[Ofner et al. (2025)](https://arxiv.org/pdf/2505.08721) suggest
+statistical testing procedures for checking whether the occurence,
+lengths and locations of gaps in incomplete functional data are related
+to the unobserved values of the functions (i.e., testing for
+missing-not-at-random *MNAR* vs missing-(completely)-at-random
+*M(C)AR*).  
+In this thesis, you would summarize the relevant statistical background,
+implement the techniques from the paper in `R` & evaluate their
+performance on some real and/or synthetic data.
 
 # Topic Area: Improving `manifun` (BA/MA)
 
