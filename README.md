@@ -162,7 +162,7 @@ fragments/unequal domains with functions of different observed lengths.
 ## Topic: Testing for missingness patterns in incomplete functional data (BA)
 
 [Ofner et al. (2025)](https://arxiv.org/pdf/2505.08721) suggest
-statistical testing procedures for checking whether the occurence,
+statistical testing procedures for checking whether the occurrence,
 lengths and locations of gaps in incomplete functional data are related
 to the unobserved values of the functions (i.e., testing for
 missing-not-at-random *MNAR* vs missing-(completely)-at-random

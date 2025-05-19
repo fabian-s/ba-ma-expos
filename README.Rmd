@@ -103,7 +103,7 @@ Stretch goals could include developing a variant of [Kim, Dasgupta, Srivastava (
 
 ## Topic: Testing for missingness patterns in incomplete functional data (BA)
 
-[Ofner et al. (2025)](https://arxiv.org/pdf/2505.08721) suggest statistical testing procedures for checking whether the occurence, lengths and locations of gaps in incomplete functional data are related to the unobserved values of the functions (i.e., testing for missing-not-at-random *MNAR* vs missing-(completely)-at-random *M(C)AR*).   
+[Ofner et al. (2025)](https://arxiv.org/pdf/2505.08721) suggest statistical testing procedures for checking whether the occurrence, lengths and locations of gaps in incomplete functional data are related to the unobserved values of the functions (i.e., testing for missing-not-at-random *MNAR* vs missing-(completely)-at-random *M(C)AR*).   
 In this thesis, you would summarize the relevant statistical background, implement the techniques from the paper in `R` & evaluate their performance on some real and/or synthetic data. 
 
 
