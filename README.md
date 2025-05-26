@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2025-05-19
+Last update: 2025-05-26
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -28,15 +28,18 @@ theses could also be good topics for theses: see
 
 Functional data $x_i(t)$ can be represented very efficiently in terms of
 their eigenfunctions (*functional principal components*: FPCs), but this
-requires estimating the auto-covariance function
+requires estimating their auto-covariance function
 $\text{Cov}(x_i(t), x_i(t'))$ from potentially noisy and/or partially
 missing data. The functional data literature contains a multitude of
-proposals on how to do so.  
-In this topic you will identify and describe the most important
-different algorithms, (re-)implement some of them for use in `tf` (or:
-write glue code to integrate existing implementations into `tf`), and
-compare their performance in an extensive benchmark study on real and
-synthetic data sets.
+proposals on how to do so (E.g. [Shang
+(2011)](https://www.monash.edu/business/ebs/research/publications/ebs/wp6-11.pdf)
+provides a slightly out-of-date review of background and basic
+approaches.).  
+For your thesis, you will describe the most important algorithms,
+(re-)implement some of them for use in `tf` (or: write glue code to
+integrate existing implementations into `tf`), and compare their
+performance in an extensive benchmark study on real and synthetic data
+sets.
 
 The topic is suitable for a wide range of programming skills and
 scientific ambitions. If both are high, this topic can even be extended
@@ -49,15 +52,25 @@ estimators like [Sarkar et al.,
 ### Topic: Implementing and comparing quantile methods for functional data (BA/MA)
 
 The functional data literature contains many possible definitions of
-“function-valued quantiles”. We would pick out some of the most
-relevant/interesting of these, summarize the relevant theory behind
-them, implement them for use within `tidyfun`, and perform a comparison
-based on real and/or synthetic data sets.
+“function-valued quantiles”, e.g. [(Gil & Romo,
+2013)](https://arxiv.org/abs/1306.1718), [(Gijbels & Nagy,
+2017)](https://projecteuclid.org/journals/statistical-science/volume-32/issue-4/On-a-General-Definition-of-Depth-for-Functional-Data/10.1214/17-STS625.full).
+We would pick out some of the most relevant/interesting of these,
+summarize the relevant theory behind them, implement them for use within
+`tidyfun`, and perform a comparison based on real and/or synthetic data
+sets.
 
-A minimal BA thesis in this topic area would be re-implementing,
+A minimal BA thesis in this topic area could be re-implementing,
 documenting and validating (most of) the methods in the
 [`rainbow`](https://cran.r-project.org/web/packages/rainbow/index.html)
-package integrated into / as an add-on package for `tf` & `tidyfun`.
+package integrated into / as an add-on package for `tf` & `tidyfun`.  
+MA theses about this topic would go deeper into the theory of functional
+data depths [(e.g. Nieto-Reyes & Battey,
+2018)](https://www.sciencedirect.com/science/article/pii/S0047259X21000166))
+and/or tackle additional complicating factors such as methods for
+incompletely observed curves (e.g. [(Elías et al.,
+2022)](https://www.mate.polimi.it/biblioteca/add/qmox/50-2022.pdf),
+[(Elías et al., 2021)](https://arxiv.org/abs/2108.11050)).
 
 <!-- 
 ### Topic: Implementing and comparing registration/alignment methods (BA/MA)
