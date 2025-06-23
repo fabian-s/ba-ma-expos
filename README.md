@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2025-05-26
+Last update: 2025-06-23
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -172,17 +172,11 @@ Srivastava (2023)](https://arxiv.org/pdf/2305.04826.pdf) based on merge
 trees instead of peak persistence diagrams or accommodating functional
 fragments/unequal domains with functions of different observed lengths.
 
+<!-- 
 ## Topic: Testing for missingness patterns in incomplete functional data (BA)
-
-[Ofner et al. (2025)](https://arxiv.org/pdf/2505.08721) suggest
-statistical testing procedures for checking whether the occurrence,
-lengths and locations of gaps in incomplete functional data are related
-to the unobserved values of the functions (i.e., testing for
-missing-not-at-random *MNAR* vs missing-(completely)-at-random
-*M(C)AR*).  
-In this thesis, you would summarize the relevant statistical background,
-implement the techniques from the paper in `R` & evaluate their
-performance on some real and/or synthetic data.
+&#10;[Ofner et al. (2025)](https://arxiv.org/pdf/2505.08721) suggest statistical testing procedures for checking whether the occurrence, lengths and locations of gaps in incomplete functional data are related to the unobserved values of the functions (i.e., testing for missing-not-at-random *MNAR* vs missing-(completely)-at-random *M(C)AR*).   
+In this thesis, you would summarize the relevant statistical background, implement the techniques from the paper in `R` & evaluate their performance on some real and/or synthetic data. 
+-->
 
 # Topic Area: Improving `manifun` (BA/MA)
 
