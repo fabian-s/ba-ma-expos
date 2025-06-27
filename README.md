@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2025-06-23
+Last update: 2025-06-27
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -356,3 +356,37 @@ interesting case studies to be published as a vignette accompanying the
 package. See [Scheipl & Greven
 (2017)](https://doi.org/10.1177/1471082X16681317) for a review of the
 underlying methodology.
+
+## Validating and extending `fastFMM::fui` (MA)
+
+The “Fast Univariate Inference for Longitudinal Functional
+Models”-framework [(Cui et al,
+2021)](https://doi.org/10.1080/10618600.2021.1950006) is an extremely
+efficient and powerful approach for large-scale regression models with
+functional responses, but the current implementation in `fastFMM` is
+somewhat limited and could be extended in a couple of directions:
+
+1.  Only *linear effects of scalar covariates* - nonlinear effects are a
+    fairly straightforward extension.
+2.  Only (effects of) *functional covariates that are measured
+    concurrently with the response* can be included, i.e., `fui`
+    currently makes the restrictive assumption that functional
+    covariates are measured at the same times as functional responses
+    and only associated with functional responses at each common
+    timepoint, not cumulatively or with some time lag. More flexible
+    effects for functional covariates not measured on the same domain as
+    the response or having cumulative or delayed effects similarly to
+    those available in `refund::pffr` could be developed.
+3.  *Domain selection* for functional effects (i.e. shrinking
+    coefficient functions to 0 across parts of the domain) could be
+    added to improve interpretability and parsimony of the fitted
+    models.
+4.  Only *functional responses on regular, common grids* are currently
+    possible – a Master’s thesis could set up some simulation
+    experiments to investigate to what extent this requirement can be
+    loosened, e.g. by interpolating or binning irregularly measured
+    functional responses in a pre-processing step to turn them into
+    functional data on a regular grid.
+
+For this thesis, you would fork the `fastFMM`-code and implement and
+evaluate a subset of the ideas above.
