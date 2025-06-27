@@ -387,6 +387,10 @@ somewhat limited and could be extended in a couple of directions:
     loosened, e.g. by interpolating or binning irregularly measured
     functional responses in a pre-processing step to turn them into
     functional data on a regular grid.
+5.  The current version *does not implement convenience functions* like
+    `predict`, `resid`, `summary` etc that users rely on for quick
+    post-processing (model diagnostics, evaluation, etc) – these should
+    be added.
 
-For this thesis, you would fork the `fastFMM`-code and implement and
-evaluate a subset of the ideas above.
+For this thesis, you would fork the `fastFMM`-code and solve (a subset
+of) the tasks above.

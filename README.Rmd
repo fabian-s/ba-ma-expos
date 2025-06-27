@@ -213,5 +213,6 @@ The "Fast Univariate Inference for Longitudinal Functional Models"-framework [(C
 3. *Domain selection* for functional effects (i.e. shrinking coefficient functions to 0 across parts of the domain) could be added to improve interpretability and parsimony of the fitted models. 
 4. Only *functional responses on regular, common grids* are currently possible -- a Master's
 thesis could set up some simulation experiments to investigate to what extent this requirement can be loosened, e.g. by interpolating or binning irregularly measured functional responses in a pre-processing step to turn them into functional data on a regular grid. 
+5. The current version *does not implement convenience functions* like `predict`, `resid`, `summary` etc that users rely on for quick post-processing (model diagnostics, evaluation, etc) -- these should be added.
 
-For this thesis, you would fork the `fastFMM`-code and implement and evaluate a subset of the ideas above.
+For this thesis, you would fork the `fastFMM`-code and solve (a subset of) the tasks above. 
