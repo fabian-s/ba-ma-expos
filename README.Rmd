@@ -90,8 +90,7 @@ In this thesis, you would:
 - summarize the core idea of the TReK algorithm and its assumptions
 - implement TReK-style covariance estimation for `tf` objects (with careful numerical tests)
 
-For BA theses, the focus would be on a correct, well-tested implementation and a clear benchmarking study.  
-For MA theses, extensions could include multivariate functional data, adaptive tuning/bandwidth selection, and/or more extensive investigations of robustness to sampling designs.
+Extensions could include multivariate functional data, adaptive tuning/bandwidth selection, and/or more extensive investigations of robustness to sampling designs.
 
 
 ### Topic: Implementing and comparing quantile methods for functional data (BA/MA)
