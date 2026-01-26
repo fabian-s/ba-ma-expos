@@ -16,19 +16,27 @@ challenging analyses of more complex data sets with advanced methods.
 
 ## Overview
 
-| Topic Area                                 | Topic                                                                                                                                                                                                                                    | Suitable for                         |
-|:-------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
-| Improving `tidyfun` and related packages   | [Implementing and comparing functional principal component-based representations for functional data](#topic-implementing-and-comparing-functional-principal-component-based-representations-for-functional-data-bama)                   | BA/MA                                |
-|                                            | [Implementing and comparing quantile methods for functional data](#topic-implementing-and-comparing-quantile-methods-for-functional-data-bama)                                                                                           | BA/MA                                |
-|                                            | [Implementing multivariate functions in `tf`](#topic-implementing-multivariate-functions-in-tf-ma-maybe-ba)                                                                                                                              | MA, maybe BA                         |
-|                                            | [Representation and computation for probability densities in Bayes space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma)                                                                    | BA, maybe MA                         |
+| Topic Area | Topic | Suitable for |
+|:---|:---|:---|
+| Improving `tidyfun` and related packages | [Implementing and comparing functional principal component-based representations for functional data](#topic-implementing-and-comparing-functional-principal-component-based-representations-for-functional-data-bama) | BA/MA |
+|  | [Fast covariance estimation via the TReK algorithm](#topic-fast-covariance-estimation-via-the-trek-algorithm-ma) | MA |
+|  | [Implementing and comparing quantile methods for functional data](#topic-implementing-and-comparing-quantile-methods-for-functional-data-bama) | BA/MA |
+|  | [Optimal transport-based depths and quantiles for functional data](#topic-optimal-transport-based-depths-and-quantiles-for-functional-data-ma) | MA |
+|  | [Implementing multivariate functions in `tf`](#topic-implementing-multivariate-functions-in-tf-ma-maybe-ba) | MA, maybe BA |
+|  | [Representation and computation for probability densities in Bayes space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma) | BA, maybe MA |
 | Regression Models with/for functional data | [Simultaneous, auto-correlation-corrected confidence bands for functional regression coefficients](#simultaneous-auto-correlation-corrected-confidence-bands-for-functional-regression-coefficients-ba-ma-possible-with-some-extensions) | BA, MA possible with some extensions |
-|                                            | [Validating and extending `fastFMM::fui`](#validating-and-extending-fastfmmfui-ma)                                                                                                                                                       | MA                                   |
-| Improving `manifun` (BA/MA)                | [Improved interactive visualization of functional data embeddings](#topic-improved-interactive-visualization-of-functional-data-embeddings-ma)                                                                                           | MA                                   |
-| (FDA) Outlier Detection                    | [Implementing the AUMVC framework](#topic-implementing-the-aumvc-framework-ma)                                                                                                                                                           | MA                                   |
-|                                            | [Criterion for structural outlyingness](#topic-criterion-for-structural-outlyingness-ba)                                                                                                                                                 | BA                                   |
-|                                            | [Multivariate Functional Outlier Visualization and Detection](#topic-multivariate-functional-outlier-visualization-and-detection-ba)                                                                                                     | BA                                   |
-| Cluster Analysis                           | [Embedding-based cluster analysis of overlapping / fuzzy clusters](#topic-embedding-based-cluster-analysis-of-overlapping-fuzzy-clusters-ma)                                                                                             | MA                                   |
+|  | [Validating and extending `fastFMM::fui`](#validating-and-extending-fastfmmfui-ma) | MA |
+|  | [Conformal prediction bands for functional responses with partial observation](#conformal-prediction-bands-for-functional-responses-with-partial-observation-ma) | MA |
+|  | [Fast GEE-based inference for large longitudinal functional datasets](#fast-gee-based-inference-for-large-longitudinal-functional-datasets-ma) | MA |
+| Network Functional Data | [Network-constrained FPCA for functional data on graphs](#topic-network-constrained-fpca-for-functional-data-on-graphs-ma) | MA |
+|  | [Network-weighted smoothing for functional data](#topic-network-weighted-smoothing-for-functional-data-bama) | BA/MA |
+|  | [Data structures for network functional data in `tidyfun`](#topic-data-structures-for-network-functional-data-in-tidyfun-ba) | BA |
+| Improving `manifun` (BA/MA) | [Improved interactive visualization of functional data embeddings](#topic-improved-interactive-visualization-of-functional-data-embeddings-ma) | MA |
+|  | [Diagnostic tools for nonlinear dimension reduction of functional data](#topic-diagnostic-tools-for-nonlinear-dimension-reduction-of-functional-data-bama) | BA/MA |
+| (FDA) Outlier Detection | [Implementing the AUMVC framework](#topic-implementing-the-aumvc-framework-ma) | MA |
+|  | [Criterion for structural outlyingness](#topic-criterion-for-structural-outlyingness-ba) | BA |
+|  | [Multivariate Functional Outlier Visualization and Detection](#topic-multivariate-functional-outlier-visualization-and-detection-ba) | BA |
+| Cluster Analysis | [Embedding-based cluster analysis of overlapping / fuzzy clusters](#topic-embedding-based-cluster-analysis-of-overlapping-fuzzy-clusters-ma) | MA |
 
 # Topic Area: Improving `tidyfun` and related packages
 
@@ -36,8 +44,7 @@ challenging analyses of more complex data sets with advanced methods.
 functional data analysis currently under development. Some of the issues
 tracked on Github for this and its underlying infrastructure package
 [`tf`](https://github.com/tidyfun/tf) could also be good topics for
-theses could also be good topics for theses: see
-[here](https://github.com/tidyfun/tf/issues) or
+theses: see [here](https://github.com/tidyfun/tf/issues) or
 [here](https://github.com/tidyfun/tidyfun/issues).
 
 ### Topic: Implementing and comparing functional principal component-based representations for functional data (BA/MA)
@@ -48,7 +55,7 @@ requires estimating their auto-covariance function
 $\text{Cov}(x_i(t), x_i(t'))$ from potentially noisy and/or partially
 missing data. The functional data literature contains a multitude of
 proposals on how to do so (E.g. [Shang
-(2011)](https://www.monash.edu/business/ebs/research/publications/ebs/wp6-11.pdf)
+(2014)](https://link.springer.com/article/10.1007/s10182-013-0213-1)
 provides a slightly out-of-date review of background and basic
 approaches.).  
 For your thesis, you will describe the most important algorithms,
@@ -65,11 +72,32 @@ to FPC representations for non-Gaussian data like [Dey et al.,
 estimators like [Sarkar et al.,
 2022](https://doi.org/10.1111/rssb.12551).
 
+### Topic: Fast covariance estimation via the TReK algorithm (MA)
+
+Estimating the auto-covariance function $\text{Cov}(x_i(t), x_i(t'))$
+from noisy and/or sparse functional data is often the main computational
+bottleneck for FPCA. The TReK (Tensorized-and-Restricted Krylov)
+algorithm [(Yun & Panaretos, 2025)](https://arxiv.org/abs/2501.08265) is
+a recent approach that aims to be both fast and memory-efficient for
+sparse designs.
+
+In this thesis, you would:
+
+- summarize the core idea of the TReK algorithm and its assumptions
+- implement TReK-style covariance estimation for `tf` objects (with
+  careful numerical tests)
+
+For BA theses, the focus would be on a correct, well-tested
+implementation and a clear benchmarking study.  
+For MA theses, extensions could include multivariate functional data,
+adaptive tuning/bandwidth selection, and/or more extensive
+investigations of robustness to sampling designs.
+
 ### Topic: Implementing and comparing quantile methods for functional data (BA/MA)
 
 The functional data literature contains many possible definitions of
-“function-valued quantiles”, e.g. [(Gil & Romo,
-2013)](https://arxiv.org/abs/1306.1718), [(Gijbels & Nagy,
+“function-valued quantiles”, e.g. [(Arribas-Gil & Romo,
+2014)](https://arxiv.org/abs/1306.1718), [(Gijbels & Nagy,
 2017)](https://projecteuclid.org/journals/statistical-science/volume-32/issue-4/On-a-General-Definition-of-Depth-for-Functional-Data/10.1214/17-STS625.full).
 We would pick out some of the most relevant/interesting of these,
 summarize the relevant theory behind them, implement them for use within
@@ -87,6 +115,34 @@ and/or tackle additional complicating factors such as methods for
 incompletely observed curves (e.g. [(Elías et al.,
 2022)](https://www.mate.polimi.it/biblioteca/add/qmox/50-2022.pdf),
 [(Elías et al., 2021)](https://arxiv.org/abs/2108.11050)).
+
+### Topic: Optimal transport-based depths and quantiles for functional data (MA)
+
+Optimal transport (OT) provides a principled way to define multivariate
+depths, ranks, and quantiles, e.g. via Monge–Kantorovich depth and
+OT-quantile functions [(Chernozhukov et al.,
+2017)](https://doi.org/10.1214/16-AOS1450). For functional data, a key
+practical question is how these ideas behave (and can be computed
+efficiently) once curves are represented in finite-dimensional form
+(common grids, basis coefficients, or FPCA scores).
+
+In this thesis, you would:
+
+- define a concrete representation strategy for `tf` objects (e.g. dense
+  grid vectors and/or FPCA score vectors)
+- implement OT-based depths/ranks and a small set of OT-based quantile
+  curves for these representations
+- develop an efficient computation strategy (e.g. entropic
+  regularization / Sinkhorn iterations; sensible approximations for
+  larger $n$)
+- provide visualizations that make OT-quantiles and OT-depth rankings
+  interpretable for functional data
+- benchmark against classical functional depths/quantiles (stability of
+  ranks, outlier detection performance, runtime scaling) on synthetic
+  and real datasets
+
+Stretch goals could include partial/irregular observation schemes and
+links to OT regression (e.g. additive OT regression ideas).
 
 ### Topic: Implementing multivariate functions in `tf` (MA, maybe BA)
 
@@ -112,7 +168,7 @@ probability-density-valued data – i.e. the unit of observation is
 represented by an entire probability distribution, not a single value,
 and the inferential goal is typically to understand how other covariates
 are associated with changes in these distributions. This has many
-interesting applications, for example see [Meier et
+interesting applications, for example see [Maier et
 al. (2021)](https://arxiv.org/abs/2110.11771) for differential effects
 of family formation on gender-specific income distributions in East and
 West Germany or [Menafoglio et
@@ -185,6 +241,116 @@ somewhat limited and could be extended in a couple of directions:
 For this thesis, you would fork the `fastFMM`-code and solve (a subset
 of) the tasks above.
 
+## Conformal prediction bands for functional responses with partial observation (MA)
+
+Conformal prediction yields distribution-free prediction sets with
+finite-sample coverage. Recent work extends conformal methods to
+functional responses and partially observed curves (e.g. [Wang et al.,
+2025](https://arxiv.org/abs/2502.15000)), but practical challenges
+remain for partially observed / irregularly sampled curves.
+
+For this thesis, you would:
+
+- implement split conformal prediction bands for fully observed
+  functional responses in a `tf`-compatible workflow (wrapping a simple
+  point prediction method such as a functional regression fit)
+- specify and justify suitable conformity scores for functional
+  residuals (e.g. sup-norm on a grid vs integrated norms)
+- develop and compare two strategies for partially observed responses:
+  - impute-then-conformal (e.g. PACE-style completion before
+    calibration)
+  - observed-domain conformity scores (with appropriate normalization /
+    weighting)
+- evaluate coverage and efficiency (band width) in simulation under
+  varying sampling designs (sparsity, dropout, irregular grids)
+- demonstrate the method on at least one real longitudinal functional
+  dataset
+
+## Fast GEE-based inference for large longitudinal functional datasets (MA)
+
+Generalized Estimating Equations (GEE) provide robust inference for
+correlated/longitudinal data without full likelihood specification.
+Recent work adapts GEE ideas to regression models with functional
+responses, enabling scalable inference on large datasets.
+
+For this thesis, you would:
+
+- validate an existing fast GEE implementation for functional regression
+  (e.g. `fastFGEE`) against `refund::pffr` on small and moderate
+  benchmark datasets
+- extend the implementation in one or two clearly scoped directions
+  (e.g. add smooth nonlinear scalar effects; add historical effects)
+- add missing user-facing tooling expected for model objects (`predict`,
+  `resid`, `summary`, diagnostics)
+- benchmark runtime and memory on a large dataset (e.g. German Mouse
+  Clinic ABR curves) and document best practices
+
+# Topic Area: Network Functional Data
+
+Network functional data arises when functional observations are
+associated with nodes in a network (e.g. brain regions, geographic
+locations, road segments, sensor networks). The goal in these topics is
+to incorporate network structure into smoothing and/or representation of
+functional observations.
+
+### Topic: Network-constrained FPCA for functional data on graphs (MA)
+
+Develop FPCA methods where latent representations are encouraged to vary
+smoothly across the network. One concrete approach is to penalize
+differences of subject-specific FPCA score vectors between neighboring
+nodes via a graph Laplacian penalty (in addition to the usual smoothness
+over the function domain).
+
+A thesis on this topic would:
+
+- specify a concrete model/estimator (what is penalized; how tuning is
+  performed; what assumptions are made about repeated curves per node)
+- implement the estimator for `tf` objects linked to a network
+  (e.g. adjacency matrix or `igraph` object)
+- provide a principled tuning strategy (CV or likelihood-style criteria)
+- design simulation experiments that quantify recovery and robustness
+  (graph structure; noise; sampling design)
+- compare to baselines (standard FPCA + post-hoc network smoothing;
+  independent fits per node) and apply to at least one real dataset
+
+### Topic: Network-weighted smoothing for functional data (BA/MA)
+
+Implement smoothing/denoising operators that borrow strength across
+network neighbors (e.g. via graph Laplacian penalties) when estimating
+mean functions or individual curves.
+
+Thesis goals could include:
+
+- implement a network-regularized smoother for `tf` objects with a clear
+  objective function
+- develop cross-validation routines for tuning network and domain
+  smoothness
+- evaluate improvements in reconstruction error and downstream tasks
+  (e.g. clustering/outlier detection) in simulation
+- demonstrate the method on a real dataset with natural network
+  structure
+
+For BA theses, the focus would be on implementation, documentation, and
+empirical evaluation.  
+For MA theses, methodological extensions (e.g. directed/weighted graphs,
+uncertainty quantification) could be included.
+
+### Topic: Data structures for network functional data in `tidyfun` (BA)
+
+Create the foundational data structures needed to represent and
+manipulate network functional data within the `tidyfun` ecosystem.
+
+A thesis on this topic would:
+
+- design a `tf`-compatible way to link curves to network nodes (and
+  store the network structure)
+- implement basic verbs (subsetting by neighborhoods, aggregating over
+  regions/communities, joins with node attributes)
+- add visualization helpers (e.g. embedding/graph views linked to
+  curves)
+- write documentation and a vignette demonstrating a simple, end-to-end
+  workflow
+
 # Topic Area: Improving `manifun` (BA/MA)
 
 [`manifun`](https://github.com/HerrMo/manifun) is a small, unpublished
@@ -216,6 +382,28 @@ Thesis goals could include:
 - Writing up interesting case studies based on real world datasets
   (e.g. mouse brain stem audiograms, bodyweight fitness movement
   patterns, story arc data, …)
+
+### Topic: Diagnostic tools for nonlinear dimension reduction of functional data (BA/MA)
+
+Nonlinear dimension reduction methods (e.g. t-SNE/UMAP) can produce
+visually compelling embeddings, but it is often unclear what aspects of
+the data they preserve or distort. The `quollr` package and paper
+[(Gamage et al., 2025)](https://arxiv.org/abs/2506.22051) provides
+tour-based diagnostics for evaluating embeddings; integrating similar
+ideas into `manifun` would make embedding workflows more transparent and
+reproducible.
+
+A thesis on this topic would:
+
+- implement standard NLDR diagnostics (e.g. trustworthiness/continuity;
+  neighborhood preservation) in a `manifun`-friendly form
+- connect diagnostics to functional-data-relevant distances (e.g. L2
+  distances between curves; derivative-based distances) and visualize
+  how these relate to embedding distances
+- add a small suite of diagnostic plots (static and, for MA theses,
+  optionally tour-based / interactive)
+- create 1–2 case studies on real functional datasets, showing how
+  diagnostics guide method and hyperparameter choices
 
 # Topic Area: (FDA) Outlier Detection
 
