@@ -121,6 +121,21 @@ Extend `tf`-classes and methods for multivariate functions with vector outputs: 
 
 This is a large SWE task - scope would probably be limited to extending either the `tfd` or `tfb` classes, and may require some major refactoring of `tf` to make such an extension work smoothly and consistently (e.g. it probably requires defining new classes and logic for function `domain`s).
 
+
+### Topic: Robust elastic registration of functional data via low-rank SRSF criteria (MA)
+
+Functional registration aims to separate amplitude from phase variation by estimating smooth time-warping functions. Existing practical approaches often either optimize fairly local matching criteria that can over-register noisy wiggles, or rely on the full elastic SRSF/SRVF machinery without exploiting the fact that the dominant shape variation is often low-dimensional. A promising thesis topic is to develop and study registration criteria that operate in the square-root slope / velocity framework of [(Srivastava et al., 2011)](https://doi.org/10.1109/TPAMI.2010.184) and [(Marron et al., 2015)](https://doi.org/10.1214/15-STS524), but stabilize alignment by targeting only the first one or few principal modes of SRSF variation, in the spirit of joint amplitude-phase PCA ideas such as [(Tucker et al., 2013)](https://doi.org/10.1016/j.csda.2012.12.001) and [(Lee & Jung, 2017)](https://arxiv.org/abs/1603.01775). This could be especially useful for noisy data, where low-rank criteria may reduce over-registration by ignoring high-frequency noise directions. Recent Bayesian work on noisy registration such as [(Tucker et al., 2021)](https://doi.org/10.1016/j.csda.2021.107298) provides additional background and possible benchmarks.
+
+For this thesis, you would:
+
+- formulate and justify one or more low-rank elastic registration criteria in SRSF space (e.g. alignment to the current mean SRSF, to PC1, or to the subspace spanned by the first $k$ PCs)
+- implement these criteria in a performant and well-documented `R` workflow, ideally integrated with `tf` / `tidyfun`
+- compare them to existing registration approaches such as `fda::register.fd`-style criteria and `fdasrvf` / `fdasrsf` elastic registration
+- design simulation studies that vary noise level, phase variability, amplitude variability, and degree of local wiggliness in order to quantify over-registration, warp recovery, and downstream impact on FPCA or regression
+- apply the best-performing methods to at least one real dataset and investigate whether the low-rank elastic criteria lead to more interpretable aligned curves and warping functions
+
+This topic combines methodological work, careful software implementation, and benchmarking. Depending on scope and results, it could plausibly be developed into a publishable methods/software paper.
+
 ### Topic: Representation and computation for probability densities in Bayes space (BA, maybe MA)  
 
 The *Bayes Space* paradigm developed by v.d. Boogart, Hron, Egozcue and others

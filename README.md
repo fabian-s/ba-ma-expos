@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2026-01-26
+Last update: 2026-03-09
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -16,27 +16,28 @@ challenging analyses of more complex data sets with advanced methods.
 
 ## Overview
 
-| Topic Area | Topic | Suitable for |
-|:---|:---|:---|
-| Improving `tidyfun` and related packages | [Implementing and comparing functional principal component-based representations for functional data](#topic-implementing-and-comparing-functional-principal-component-based-representations-for-functional-data-bama) | BA/MA |
-|  | [Fast covariance estimation via the TReK algorithm](#topic-fast-covariance-estimation-via-the-trek-algorithm-ma) | MA |
-|  | [Implementing and comparing quantile methods for functional data](#topic-implementing-and-comparing-quantile-methods-for-functional-data-bama) | BA/MA |
-|  | [Optimal transport-based depths and quantiles for functional data](#topic-optimal-transport-based-depths-and-quantiles-for-functional-data-ma) | MA |
-|  | [Implementing multivariate functions in `tf`](#topic-implementing-multivariate-functions-in-tf-ma-maybe-ba) | MA, maybe BA |
-|  | [Representation and computation for probability densities in Bayes space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma) | BA, maybe MA |
+| Topic Area                                 | Topic                                                                                                                                                                                                                                    | Suitable for                         |
+|:-------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
+| Improving `tidyfun` and related packages   | [Implementing and comparing functional principal component-based representations for functional data](#topic-implementing-and-comparing-functional-principal-component-based-representations-for-functional-data-bama)                   | BA/MA                                |
+|                                            | [Fast covariance estimation via the TReK algorithm](#topic-fast-covariance-estimation-via-the-trek-algorithm-ma)                                                                                                                         | MA                                   |
+|                                            | [Implementing and comparing quantile methods for functional data](#topic-implementing-and-comparing-quantile-methods-for-functional-data-bama)                                                                                           | BA/MA                                |
+|                                            | [Optimal transport-based depths and quantiles for functional data](#topic-optimal-transport-based-depths-and-quantiles-for-functional-data-ma)                                                                                           | MA                                   |
+|                                            | [Implementing multivariate functions in `tf`](#topic-implementing-multivariate-functions-in-tf-ma-maybe-ba)                                                                                                                              | MA, maybe BA                         |
+|                                            | [Robust elastic registration of functional data via low-rank SRSF criteria](#topic-robust-elastic-registration-of-functional-data-via-low-rank-srsf-criteria-ma)                                                                         | MA                                   |
+|                                            | [Representation and computation for probability densities in Bayes space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma)                                                                    | BA, maybe MA                         |
 | Regression Models with/for functional data | [Simultaneous, auto-correlation-corrected confidence bands for functional regression coefficients](#simultaneous-auto-correlation-corrected-confidence-bands-for-functional-regression-coefficients-ba-ma-possible-with-some-extensions) | BA, MA possible with some extensions |
-|  | [Validating and extending `fastFMM::fui`](#validating-and-extending-fastfmmfui-ma) | MA |
-|  | [Conformal prediction bands for functional responses with partial observation](#conformal-prediction-bands-for-functional-responses-with-partial-observation-ma) | MA |
-|  | [Fast GEE-based inference for large longitudinal functional datasets](#fast-gee-based-inference-for-large-longitudinal-functional-datasets-ma) | MA |
-| Network Functional Data | [Network-constrained FPCA for functional data on graphs](#topic-network-constrained-fpca-for-functional-data-on-graphs-ma) | MA |
-|  | [Network-weighted smoothing for functional data](#topic-network-weighted-smoothing-for-functional-data-bama) | BA/MA |
-|  | [Data structures for network functional data in `tidyfun`](#topic-data-structures-for-network-functional-data-in-tidyfun-ba) | BA |
-| Improving `manifun` (BA/MA) | [Improved interactive visualization of functional data embeddings](#topic-improved-interactive-visualization-of-functional-data-embeddings-ma) | MA |
-|  | [Diagnostic tools for nonlinear dimension reduction of functional data](#topic-diagnostic-tools-for-nonlinear-dimension-reduction-of-functional-data-bama) | BA/MA |
-| (FDA) Outlier Detection | [Implementing the AUMVC framework](#topic-implementing-the-aumvc-framework-ma) | MA |
-|  | [Criterion for structural outlyingness](#topic-criterion-for-structural-outlyingness-ba) | BA |
-|  | [Multivariate Functional Outlier Visualization and Detection](#topic-multivariate-functional-outlier-visualization-and-detection-ba) | BA |
-| Cluster Analysis | [Embedding-based cluster analysis of overlapping / fuzzy clusters](#topic-embedding-based-cluster-analysis-of-overlapping-fuzzy-clusters-ma) | MA |
+|                                            | [Validating and extending `fastFMM::fui`](#validating-and-extending-fastfmmfui-ma)                                                                                                                                                       | MA                                   |
+|                                            | [Conformal prediction bands for functional responses with partial observation](#conformal-prediction-bands-for-functional-responses-with-partial-observation-ma)                                                                         | MA                                   |
+|                                            | [Fast GEE-based inference for large longitudinal functional datasets](#fast-gee-based-inference-for-large-longitudinal-functional-datasets-ma)                                                                                           | MA                                   |
+| Network Functional Data                    | [Network-constrained FPCA for functional data on graphs](#topic-network-constrained-fpca-for-functional-data-on-graphs-ma)                                                                                                               | MA                                   |
+|                                            | [Network-weighted smoothing for functional data](#topic-network-weighted-smoothing-for-functional-data-bama)                                                                                                                             | BA/MA                                |
+|                                            | [Data structures for network functional data in `tidyfun`](#topic-data-structures-for-network-functional-data-in-tidyfun-ba)                                                                                                             | BA                                   |
+| Improving `manifun` (BA/MA)                | [Improved interactive visualization of functional data embeddings](#topic-improved-interactive-visualization-of-functional-data-embeddings-ma)                                                                                           | MA                                   |
+|                                            | [Diagnostic tools for nonlinear dimension reduction of functional data](#topic-diagnostic-tools-for-nonlinear-dimension-reduction-of-functional-data-bama)                                                                               | BA/MA                                |
+| (FDA) Outlier Detection                    | [Implementing the AUMVC framework](#topic-implementing-the-aumvc-framework-ma)                                                                                                                                                           | MA                                   |
+|                                            | [Criterion for structural outlyingness](#topic-criterion-for-structural-outlyingness-ba)                                                                                                                                                 | BA                                   |
+|                                            | [Multivariate Functional Outlier Visualization and Detection](#topic-multivariate-functional-outlier-visualization-and-detection-ba)                                                                                                     | BA                                   |
+| Cluster Analysis                           | [Embedding-based cluster analysis of overlapping / fuzzy clusters](#topic-embedding-based-cluster-analysis-of-overlapping-fuzzy-clusters-ma)                                                                                             | MA                                   |
 
 # Topic Area: Improving `tidyfun` and related packages
 
@@ -152,6 +153,50 @@ either the `tfd` or `tfb` classes, and may require some major
 refactoring of `tf` to make such an extension work smoothly and
 consistently (e.g. it probably requires defining new classes and logic
 for function `domain`s).
+
+### Topic: Robust elastic registration of functional data via low-rank SRSF criteria (MA)
+
+Functional registration aims to separate amplitude from phase variation
+by estimating smooth time-warping functions. Existing practical
+approaches often either optimize fairly local matching criteria that can
+over-register noisy wiggles, or rely on the full elastic SRSF/SRVF
+machinery without exploiting the fact that the dominant shape variation
+is often low-dimensional. A promising thesis topic is to develop and
+study registration criteria that operate in the square-root slope /
+velocity framework of [(Srivastava et al.,
+2011)](https://doi.org/10.1109/TPAMI.2010.184) and [(Marron et al.,
+2015)](https://doi.org/10.1214/15-STS524), but stabilize alignment by
+targeting only the first one or few principal modes of SRSF variation,
+in the spirit of joint amplitude-phase PCA ideas such as [(Tucker et
+al., 2013)](https://doi.org/10.1016/j.csda.2012.12.001) and [(Lee &
+Jung, 2017)](https://arxiv.org/abs/1603.01775). This could be especially
+useful for noisy data, where low-rank criteria may reduce
+over-registration by ignoring high-frequency noise directions. Recent
+Bayesian work on noisy registration such as [(Tucker et al.,
+2021)](https://doi.org/10.1016/j.csda.2021.107298) provides additional
+background and possible benchmarks.
+
+For this thesis, you would:
+
+- formulate and justify one or more low-rank elastic registration
+  criteria in SRSF space (e.g. alignment to the current mean SRSF, to
+  PC1, or to the subspace spanned by the first $k$ PCs)
+- implement these criteria in a performant and well-documented `R`
+  workflow, ideally integrated with `tf` / `tidyfun`
+- compare them to existing registration approaches such as
+  `fda::register.fd`-style criteria and `fdasrvf` / `fdasrsf` elastic
+  registration
+- design simulation studies that vary noise level, phase variability,
+  amplitude variability, and degree of local wiggliness in order to
+  quantify over-registration, warp recovery, and downstream impact on
+  FPCA or regression
+- apply the best-performing methods to at least one real dataset and
+  investigate whether the low-rank elastic criteria lead to more
+  interpretable aligned curves and warping functions
+
+This topic combines methodological work, careful software
+implementation, and benchmarking. Depending on scope and results, it
+could plausibly be developed into a publishable methods/software paper.
 
 ### Topic: Representation and computation for probability densities in Bayes space (BA, maybe MA)
 
