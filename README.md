@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2026-03-09
+Last update: 2026-04-20
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -24,6 +24,7 @@ challenging analyses of more complex data sets with advanced methods.
 |                                            | [Optimal transport-based depths and quantiles for functional data](#topic-optimal-transport-based-depths-and-quantiles-for-functional-data-ma)                                                                                           | MA                                   |
 |                                            | [Implementing multivariate functions in `tf`](#topic-implementing-multivariate-functions-in-tf-ma-maybe-ba)                                                                                                                              | MA, maybe BA                         |
 |                                            | [Robust elastic registration of functional data via low-rank SRSF criteria](#topic-robust-elastic-registration-of-functional-data-via-low-rank-srsf-criteria-ma)                                                                         | MA                                   |
+|                                            | [Sobolev-regularized pairwise alignment of functional data](#topic-sobolev-regularized-pairwise-alignment-of-functional-data-ma)                                                                                                         | MA                                   |
 |                                            | [Representation and computation for probability densities in Bayes space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma)                                                                    | BA, maybe MA                         |
 | Regression Models with/for functional data | [Simultaneous, auto-correlation-corrected confidence bands for functional regression coefficients](#simultaneous-auto-correlation-corrected-confidence-bands-for-functional-regression-coefficients-ba-ma-possible-with-some-extensions) | BA, MA possible with some extensions |
 |                                            | [Validating and extending `fastFMM::fui`](#validating-and-extending-fastfmmfui-ma)                                                                                                                                                       | MA                                   |
@@ -197,6 +198,51 @@ For this thesis, you would:
 This topic combines methodological work, careful software
 implementation, and benchmarking. Depending on scope and results, it
 could plausibly be developed into a publishable methods/software paper.
+
+### Topic: Sobolev-regularized pairwise alignment of functional data (MA)
+
+Functional registration is often easiest to formulate as a pairwise
+alignment problem: find a smooth, strictly increasing warping function
+that maps one curve onto another while avoiding pathological local
+distortions. A recent proposal by [Wu
+(2026)](https://arxiv.org/abs/2604.11990) uses a centered log-ratio
+(CLR) representation of warping functions together with Sobolev
+penalties on the centered log-derivative. This makes it possible to
+optimize over unconstrained coefficients while still obtaining valid
+monotone warps, and it avoids the numerical differentiation of noisy
+curves required by derivative-based SRSF/SRVF approaches. The paper
+studies several related objective functions, including standard $L^2$,
+symmetric $L^2$, isometry-preserving, and Jacobian-weighted
+formulations.
+
+For this thesis, you would:
+
+- summarize the CLR/Sobolev registration framework, its assumptions, and
+  its relation to existing elastic registration methods
+- implement the main pairwise alignment objectives in a clean,
+  reproducible `R` workflow, ideally with interfaces for `tf` /
+  `tidyfun` objects
+- investigate numerical choices such as basis dimension, Sobolev penalty
+  weights, optimization routines, and initialization strategies
+- compare the method to existing registration approaches such as
+  `fda::register.fd`-style criteria and `fdasrvf` / `fdasrsf` elastic
+  registration
+- design simulation studies that vary noise level, phase variability,
+  amplitude variability, sampling grid, and local wiggliness in order to
+  quantify warp recovery, over-registration, robustness, runtime, and
+  downstream effects on FPCA or regression
+- apply the best-performing variants to at least one real functional
+  dataset and assess whether the estimated warps and registered curves
+  are interpretable
+
+The thesis can be shaped in two directions. A theory-oriented version
+would focus on understanding the objective functions, the Sobolev
+geometry of the warp representation, existence and consistency
+arguments, and the limitations of finite-dimensional approximations. An
+implementation- and benchmark-oriented version would focus on a stable
+`R` implementation, careful empirical comparisons, tuning
+recommendations, and reusable examples for the `tf` / `tidyfun`
+ecosystem.
 
 ### Topic: Representation and computation for probability densities in Bayes space (BA, maybe MA)
 
