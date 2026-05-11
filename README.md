@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2026-04-20
+Last update: 2026-05-11
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -20,6 +20,7 @@ challenging analyses of more complex data sets with advanced methods.
 |:-------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
 | Improving `tidyfun` and related packages   | [Implementing and comparing functional principal component-based representations for functional data](#topic-implementing-and-comparing-functional-principal-component-based-representations-for-functional-data-bama)                   | BA/MA                                |
 |                                            | [Fast covariance estimation via the TReK algorithm](#topic-fast-covariance-estimation-via-the-trek-algorithm-ma)                                                                                                                         | MA                                   |
+|                                            | [Markov-regularized covariance estimation for functional data](#topic-markov-regularized-covariance-estimation-for-functional-data-ma)                                                                                                   | MA                                   |
 |                                            | [Implementing and comparing quantile methods for functional data](#topic-implementing-and-comparing-quantile-methods-for-functional-data-bama)                                                                                           | BA/MA                                |
 |                                            | [Optimal transport-based depths and quantiles for functional data](#topic-optimal-transport-based-depths-and-quantiles-for-functional-data-ma)                                                                                           | MA                                   |
 |                                            | [Implementing multivariate functions in `tf`](#topic-implementing-multivariate-functions-in-tf-ma-maybe-ba)                                                                                                                              | MA, maybe BA                         |
@@ -92,6 +93,31 @@ In this thesis, you would:
 Extensions could include multivariate functional data, adaptive
 tuning/bandwidth selection, and/or more extensive investigations of
 robustness to sampling designs.
+
+### Topic: Markov-regularized covariance estimation for functional data (MA)
+
+Estimating covariance functions is a central bottleneck in functional
+data analysis, especially for prediction, kriging, FPCA, and regression
+methods that require stable inversion of the covariance operator. A
+recent proposal by [Naepels & Panaretos
+(2026)](https://arxiv.org/abs/2604.18229) replaces classical smoothness
+assumptions by a Markov constraint on the functional covariance
+structure: for Gaussian processes, Markovianity induces a
+low-dimensional shape constraint on the covariance kernel and
+corresponds, on finite grids, to a tridiagonal precision matrix. In this
+thesis, you would summarize the Markov-transform estimator and its
+assumptions, implement it for regular and irregular `tf` objects, and
+benchmark it against empirical, smoothed, and FPCA/PACE-style covariance
+estimators. A central question would be whether Markov-regularized
+covariance estimation is useful beyond exactly Markov processes,
+especially for inverse-covariance-driven tasks such as kriging, curve
+completion, and prediction from sparse observations. A natural extension
+would be to develop shrinkage estimators interpolating between a
+conventional covariance estimator and its Markov projection, allowing a
+data-adaptive bias–variance tradeoff under model misspecification. The
+thesis would combine theory, careful `R` implementation, and simulation
+studies varying sampling density, noise level, degree of Markov
+misspecification, and downstream task performance.
 
 ### Topic: Implementing and comparing quantile methods for functional data (BA/MA)
 
@@ -294,20 +320,23 @@ The “Fast Univariate Inference for Longitudinal Functional
 Models”-framework [(Cui et al,
 2021)](https://doi.org/10.1080/10618600.2021.1950006) is an extremely
 efficient and powerful approach for large-scale regression models with
-functional responses, but the current implementation in `fastFMM` is
-somewhat limited and could be extended in a couple of directions:
+functional responses. A major recent extension by [Verace, McMahon & Cui
+(2026)](https://arxiv.org/abs/2605.00765) generalizes this to
+**function-on-function regression**, where both predictors and responses
+are functional, while maintaining computational efficiency for
+longitudinal data.
+
+The current implementation in `fastFMM` offers several natural extension
+directions in light of this advance:
 
 1.  Only *linear effects of scalar covariates* - nonlinear effects are a
     fairly straightforward extension.
-2.  Only (effects of) *functional covariates that are measured
-    concurrently with the response* can be included, i.e., `fui`
-    currently makes the restrictive assumption that functional
-    covariates are measured at the same times as functional responses
-    and only associated with functional responses at each common
-    timepoint, not cumulatively or with some time lag. More flexible
-    effects for functional covariates not measured on the same domain as
-    the response or having cumulative or delayed effects similarly to
-    those available in `refund::pffr` could be developed.
+2.  The original `fui` framework handles *functional covariates that are
+    measured concurrently with the response*, making restrictive
+    assumptions about functional covariates being measured at the same
+    times as responses and only associated pointwise. The new
+    function-on-function framework may enable more flexible concurrent
+    and lagged functional covariate effects.
 3.  *Domain selection* for functional effects (i.e. shrinking
     coefficient functions to 0 across parts of the domain) could be
     added to improve interpretability and parsimony of the fitted
@@ -327,8 +356,17 @@ somewhat limited and could be extended in a couple of directions:
     post-processing (model diagnostics, evaluation, etc) – these should
     be added.
 
-For this thesis, you would fork the `fastFMM`-code and solve (a subset
-of) the tasks above.
+For this thesis, you could:
+
+- implement the fast function-on-function regression framework from
+  Verace et al. (2026) for `fastFMM`, extending `fui` to handle
+  functional predictors efficiently
+- benchmark the new function-on-function approach against existing
+  methods (e.g. `refund::pffr`, direct tensor decomposition approaches)
+  on realistic longitudinal functional data
+- extend convenience functions and post-processing tools to the
+  function-on-function setting
+- solve (a subset of) the above tasks to improve the overall toolkit
 
 ## Conformal prediction bands for functional responses with partial observation (MA)
 
