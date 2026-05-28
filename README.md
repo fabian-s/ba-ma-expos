@@ -9,7 +9,7 @@ Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
 interested in one of these BA or MA thesis topics or if you want to
 discuss (related) ideas of your own.  
 Please also confirm that you are formally qualified to start your thesis 
-(BA: passing grades in modules P3, P7, P8, P9, P16;  MA: P1, P2, P3) first.
+(BA: passing grades in modules P3, P7, P8, P9, P16;  MA: P1, P2, P3) first.  
 For BA theses, we would keep the focus on refactoring, evaluating and
 describing existing implementations and/or applying them to real data.  
 For MA theses, either novel developments with detailed theory along with
