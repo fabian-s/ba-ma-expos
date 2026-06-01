@@ -316,16 +316,3 @@ You would develop and evaluate a procedure for identifying embedding dimensions 
 ### Topic: Multivariate Functional Outlier Visualization and Detection (BA)
 
 Replicate the simulation study and application examples of [Aléman-Gomez et al. (2021)](https://onlinelibrary.wiley.com/doi/pdf/10.1002/sim.9342) based on a less arbitrary [geometrical-topological approach](https://arxiv.org/pdf/2109.06849) and compare results.
-
-# Topic Area: Cluster Analysis
-
-## Topic: Embedding-based cluster analysis of overlapping / fuzzy clusters (MA)
-
-Both UMAP and t-SNE, state-of-the-art manifold learning methods, can be used to detect and represent the cluster structure of complex, high-dimensional data. However, which method is more suitable for the task (or specific aspects of the task) under which conditions remains an open question. Answering this question is complicated since several hyperparameters need to be tuned for both methods and the underlying task is unsupervised (i.e., tuning is hard...).\
-While there are indications that UMAP leads to "better" clusterings (smaller intra-cluster distances, larger inter-cluster distances) when high-dimensional data consists of clearly separate clusters, the situation is less clear in situations with very close or even overlapping clusters. The focus of this project is to assess the latter setting and tasks include the following:
-
--   set up extensive synthetic experiments to obtain an initial understanding of the problem. Possible factors to assess:
-    -   Overlap/Separability as a function of mean and variance of the underlying data generating processes
-    -   Parameter sensitivity w.r.t. to dimensionality and number of observations
-    -   Relevant parameters for improving separability
--   investigate whether measures of separability ([pdf](https://arxiv.org/pdf/2109.05180.pdf)) can be used to reliably infer the structure of data set
