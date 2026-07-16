@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2026-06-01
+Last update: 2026-07-16
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -31,6 +31,7 @@ challenging analyses of more complex data sets with advanced methods.
 |                                            | [Sobolev-regularized pairwise alignment of functional data](#topic-sobolev-regularized-pairwise-alignment-of-functional-data-ma)                                                                                                         | MA                                   |
 |                                            | [Representation and computation for probability densities in Bayes space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma)                                                                    | BA, maybe MA                         |
 | Regression Models with/for functional data | [Simultaneous, auto-correlation-corrected confidence bands for functional regression coefficients](#simultaneous-auto-correlation-corrected-confidence-bands-for-functional-regression-coefficients-ba-ma-possible-with-some-extensions) | BA, MA possible with some extensions |
+|                                            | [Robust hypothesis tests for `pffr()` under within-curve dependence](#robust-hypothesis-tests-for-pffr-under-within-curve-dependence-ma)                                                                                                 | MA                                   |
 |                                            | [Validating and extending `fastFMM::fui`](#validating-and-extending-fastfmmfui-ma)                                                                                                                                                       | MA                                   |
 |                                            | [Conformal prediction bands for functional responses with partial observation](#conformal-prediction-bands-for-functional-responses-with-partial-observation-ma)                                                                         | MA                                   |
 |                                            | [Fast GEE-based inference for large longitudinal functional datasets](#fast-gee-based-inference-for-large-longitudinal-functional-datasets-ma)                                                                                           | MA                                   |
@@ -315,6 +316,41 @@ For this thesis, you would implement [Liebl & Reimherr’s
 proposal for fast and fair simultaneous CIs for `pffr`-fits and compare
 its operating characteristics to bootstrap-based and conventional
 alternatives.
+
+## Robust hypothesis tests for `pffr()` under within-curve dependence (MA)
+
+Recent work in this group put point-wise confidence intervals for
+`pffr()` on solid footing: the model-based intervals `pffr()` reports by
+default treat every evaluation point of a curve as independent,
+understating uncertainty whenever curves are dependent within themselves
+– the rule, not the exception, in functional data – and the problem gets
+worse, not better, as the response grid is refined. A family of
+cluster-robust sandwich covariances built on the penalized likelihood,
+now shipped in `refund`, fixes the *interval*. It does nothing for
+`pffr()`’s significance *tests*: the per-term test `summary.gam()`
+reports is a quadratic form built from the very covariance block the
+sandwich work replaces, so it should be too liberal under exactly the
+same dependence structures that made the old intervals too narrow – an
+effect nobody has measured yet.
+
+For this thesis, you would:
+
+- work out precisely how `mgcv`’s term-test statistic is constructed for
+  `pffr()` fits (rank truncation, reference distribution, `p.type`
+  choices)
+- show why naively substituting the robust covariance into that
+  statistic does not by itself restore correct calibration, and
+  implement a Satterthwaite-type correction (as used for related tests
+  in the `clubSandwich` package) adapted to the penalized setting
+- implement a bootstrap-calibrated alternative building on this group’s
+  existing refit-free cluster bootstrap, including a simultaneous-band
+  exclusion test that also localizes *where* a functional term is
+  significant, not just whether it is
+- run a simulation study measuring empirical size and power of the
+  default test against these robust alternatives, and illustrate the
+  practical difference on a real dataset
+
+Full literature and design details are available on request.
 
 ## Validating and extending `fastFMM::fui` (MA)
 

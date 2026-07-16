@@ -172,9 +172,22 @@ A thesis on this topic would
 ## Simultaneous, auto-correlation-corrected confidence bands for functional regression coefficients (BA, MA possible with some extensions)
 
 Confidence intervals for `refund`'s functional regression models estimated by `pffr` rely on very restrictive assumptions about model residuals and are only valid point-wise, not simultaneously across the function. Therefore, they are inappropriate in many applications and tend to yield over-optimistic results.  
-For this thesis, you would implement [Liebl & Reimherr's (2020)](https://link.springer.com/chapter/10.1007/978-3-030-47756-1_21) proposal for fast and fair simultaneous CIs for `pffr`-fits and compare its operating characteristics to bootstrap-based and conventional alternatives. 
+For this thesis, you would implement [Liebl & Reimherr's (2020)](https://link.springer.com/chapter/10.1007/978-3-030-47756-1_21) proposal for fast and fair simultaneous CIs for `pffr`-fits and compare its operating characteristics to bootstrap-based and conventional alternatives.
 
-## Validating and extending `fastFMM::fui` (MA) 
+## Robust hypothesis tests for `pffr()` under within-curve dependence (MA)
+
+Recent work in this group put point-wise confidence intervals for `pffr()` on solid footing: the model-based intervals `pffr()` reports by default treat every evaluation point of a curve as independent, understating uncertainty whenever curves are dependent within themselves -- the rule, not the exception, in functional data -- and the problem gets worse, not better, as the response grid is refined. A family of cluster-robust sandwich covariances built on the penalized likelihood, now shipped in `refund`, fixes the *interval*. It does nothing for `pffr()`'s significance *tests*: the per-term test `summary.gam()` reports is a quadratic form built from the very covariance block the sandwich work replaces, so it should be too liberal under exactly the same dependence structures that made the old intervals too narrow -- an effect nobody has measured yet.
+
+For this thesis, you would:
+
+- work out precisely how `mgcv`'s term-test statistic is constructed for `pffr()` fits (rank truncation, reference distribution, `p.type` choices)
+- show why naively substituting the robust covariance into that statistic does not by itself restore correct calibration, and implement a Satterthwaite-type correction (as used for related tests in the `clubSandwich` package) adapted to the penalized setting
+- implement a bootstrap-calibrated alternative building on this group's existing refit-free cluster bootstrap, including a simultaneous-band exclusion test that also localizes *where* a functional term is significant, not just whether it is
+- run a simulation study measuring empirical size and power of the default test against these robust alternatives, and illustrate the practical difference on a real dataset
+
+Full literature and design details are available on request.
+
+## Validating and extending `fastFMM::fui` (MA)
 
 The "Fast Univariate Inference for Longitudinal Functional Models"-framework [(Cui et al,  2021)](https://doi.org/10.1080/10618600.2021.1950006) is an extremely efficient and powerful approach for large-scale regression models with functional responses. A major recent extension by [Verace, McMahon & Cui (2026)](https://arxiv.org/abs/2605.00765) generalizes this to **function-on-function regression**, where both predictors and responses are functional, while maintaining computational efficiency for longitudinal data.
 
