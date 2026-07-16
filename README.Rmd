@@ -169,11 +169,6 @@ A thesis on this topic would
 
 # Topic Area: Regression Models with/for functional data
 
-## Simultaneous, auto-correlation-corrected confidence bands for functional regression coefficients (BA, MA possible with some extensions)
-
-Confidence intervals for `refund`'s functional regression models estimated by `pffr` rely on very restrictive assumptions about model residuals and are only valid point-wise, not simultaneously across the function. Therefore, they are inappropriate in many applications and tend to yield over-optimistic results.  
-For this thesis, you would implement [Liebl & Reimherr's (2020)](https://link.springer.com/chapter/10.1007/978-3-030-47756-1_21) proposal for fast and fair simultaneous CIs for `pffr`-fits and compare its operating characteristics to bootstrap-based and conventional alternatives.
-
 ## Robust hypothesis tests for `pffr()` under within-curve dependence (MA)
 
 Recent work in this group put point-wise confidence intervals for `pffr()` on solid footing: the model-based intervals `pffr()` reports by default treat every evaluation point of a curve as independent, understating uncertainty whenever curves are dependent within themselves -- the rule, not the exception, in functional data -- and the problem gets worse, not better, as the response grid is refined. A family of cluster-robust sandwich covariances built on the penalized likelihood, now shipped in `refund`, fixes the *interval*. It does nothing for `pffr()`'s significance *tests*: the per-term test `summary.gam()` reports is a quadratic form built from the very covariance block the sandwich work replaces, so it should be too liberal under exactly the same dependence structures that made the old intervals too narrow -- an effect nobody has measured yet.
