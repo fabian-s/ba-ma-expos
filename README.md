@@ -27,7 +27,6 @@ challenging analyses of more complex data sets with advanced methods.
 |                                            | [Smooth-and-sparse multivariate FPCA via functional SVD](#topic-smooth-and-sparse-multivariate-fpca-via-functional-svd-bama)                                                                                           | BA/MA        |
 |                                            | [Implementing and comparing quantile methods for functional data](#topic-implementing-and-comparing-quantile-methods-for-functional-data-bama)                                                                         | BA/MA        |
 |                                            | [Optimal transport-based depths and quantiles for functional data](#topic-optimal-transport-based-depths-and-quantiles-for-functional-data-ma)                                                                         | MA           |
-|                                            | [Implementing multivariate functions in `tf`](#topic-implementing-multivariate-functions-in-tf-ma-maybe-ba)                                                                                                            | MA, maybe BA |
 |                                            | [Robust elastic registration of functional data via low-rank SRSF criteria](#topic-robust-elastic-registration-of-functional-data-via-low-rank-srsf-criteria-ma)                                                       | MA           |
 |                                            | [Sobolev-regularized pairwise alignment of functional data](#topic-sobolev-regularized-pairwise-alignment-of-functional-data-ma)                                                                                       | MA           |
 |                                            | [Representation and computation for probability densities in Bayes space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma)                                                  | BA, maybe MA |
@@ -202,17 +201,6 @@ In this thesis, you would:
 
 Stretch goals could include partial/irregular observation schemes and
 links to OT regression (e.g. additive OT regression ideas).
-
-### Topic: Implementing multivariate functions in `tf` (MA, maybe BA)
-
-Extend `tf`-classes and methods for multivariate functions with vector
-outputs: $f:\mathbb R \to \mathbb R^d$ for $d>1$.
-
-This is a large SWE task - scope would probably be limited to extending
-either the `tfd` or `tfb` classes, and may require some major
-refactoring of `tf` to make such an extension work smoothly and
-consistently (e.g. it probably requires defining new classes and logic
-for function `domain`s).
 
 ### Topic: Robust elastic registration of functional data via low-rank SRSF criteria (MA)
 
