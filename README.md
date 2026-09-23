@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2026-07-16
+Last update: 2026-09-23
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -24,6 +24,7 @@ challenging analyses of more complex data sets with advanced methods.
 | Improving `tidyfun` and related packages   | [Implementing and comparing functional principal component-based representations for functional data](#topic-implementing-and-comparing-functional-principal-component-based-representations-for-functional-data-bama) | BA/MA        |
 |                                            | [Fast covariance estimation via the TReK algorithm](#topic-fast-covariance-estimation-via-the-trek-algorithm-ma)                                                                                                       | MA           |
 |                                            | [Markov-regularized covariance estimation for functional data](#topic-markov-regularized-covariance-estimation-for-functional-data-ma)                                                                                 | MA           |
+|                                            | [Smooth-and-sparse multivariate FPCA via functional SVD](#topic-smooth-and-sparse-multivariate-fpca-via-functional-svd-bama)                                                                                           | BA/MA        |
 |                                            | [Implementing and comparing quantile methods for functional data](#topic-implementing-and-comparing-quantile-methods-for-functional-data-bama)                                                                         | BA/MA        |
 |                                            | [Optimal transport-based depths and quantiles for functional data](#topic-optimal-transport-based-depths-and-quantiles-for-functional-data-ma)                                                                         | MA           |
 |                                            | [Implementing multivariate functions in `tf`](#topic-implementing-multivariate-functions-in-tf-ma-maybe-ba)                                                                                                            | MA, maybe BA |
@@ -34,7 +35,9 @@ challenging analyses of more complex data sets with advanced methods.
 |                                            | [Validating and extending `fastFMM::fui`](#validating-and-extending-fastfmmfui-ma)                                                                                                                                     | MA           |
 |                                            | [Conformal prediction bands for functional responses with partial observation](#conformal-prediction-bands-for-functional-responses-with-partial-observation-ma)                                                       | MA           |
 |                                            | [Fast GEE-based inference for large longitudinal functional datasets](#fast-gee-based-inference-for-large-longitudinal-functional-datasets-ma)                                                                         | MA           |
+|                                            | [Spatio-temporal regression for distribution-valued responses](#spatio-temporal-regression-for-distribution-valued-responses-ma)                                                                                       | MA           |
 | Network Functional Data                    | [Network-constrained FPCA for functional data on graphs](#topic-network-constrained-fpca-for-functional-data-on-graphs-ma)                                                                                             | MA           |
+|                                            | [Neighbourhood-based principal components for spatial functional data](#topic-neighbourhood-based-principal-components-for-spatial-functional-data-bama)                                                               | BA/MA        |
 |                                            | [Network-weighted smoothing for functional data](#topic-network-weighted-smoothing-for-functional-data-bama)                                                                                                           | BA/MA        |
 |                                            | [Data structures for network functional data in `tidyfun`](#topic-data-structures-for-network-functional-data-in-tidyfun-ba)                                                                                           | BA           |
 | Improving `manifun` (BA/MA)                | [Improved interactive visualization of functional data embeddings](#topic-improved-interactive-visualization-of-functional-data-embeddings-ma)                                                                         | MA           |
@@ -120,6 +123,34 @@ data-adaptive bias–variance tradeoff under model misspecification. The
 thesis would combine theory, careful `R` implementation, and simulation
 studies varying sampling density, noise level, degree of Markov
 misspecification, and downstream task performance.
+
+### Topic: Smooth-and-sparse multivariate FPCA via functional SVD (BA/MA)
+
+Multivariate functional PCA ([Happ & Greven,
+2018](https://doi.org/10.1080/01621459.2016.1273115)) summarizes several
+curves per subject by a few shared components and one score per subject
+and component. [Zhao et al. (2026)](https://arxiv.org/abs/2609.14815)
+estimate these components with a penalized SVD and add a new twist: a
+sparsity penalty that sets the *scores* of some subjects exactly to
+zero, so that each component describes only the subjects it is relevant
+for. The method is available in the CRAN package
+[`ReMFPCA`](https://cran.r-project.org/package=ReMFPCA).
+
+For your thesis, you would:
+
+- summarize the method and how it relates to standard (smoothed) MFPCA
+- make `ReMFPCA` usable with `tf`/`tidyfun` objects and validate the
+  interface
+- test the method in settings the original paper does not cover, in
+  particular when there is no subject group structure for the sparsity
+  to find
+- apply it to a real multivariate functional dataset
+
+An MA thesis would also address open methodological questions, such as
+how the two penalties should be tuned jointly and how to handle
+incompletely observed curves.
+
+Full literature and design details are available on request.
 
 ### Topic: Implementing and comparing quantile methods for functional data (BA/MA)
 
@@ -436,6 +467,34 @@ For this thesis, you would:
 - benchmark runtime and memory on a large dataset (e.g. German Mouse
   Clinic ABR curves) and document best practices
 
+## Spatio-temporal regression for distribution-valued responses (MA)
+
+In many monitoring problems the natural response at each site and time
+is an entire *distribution*, e.g. all weekly pollutant readings at a
+station in a given month. Representing each distribution by its quantile
+function turns this into functional regression with a shape constraint:
+quantile functions must be increasing. [Ghosal, Majumder & Sahoo
+(2026)](https://arxiv.org/abs/2609.15961) propose a Bayesian model for
+such responses observed at many sites and repeatedly over time
+(*spatially-indexed longitudinal distributional outcome regression*,
+SILDOR). They apply it to nitrate concentrations at 92 US monitoring
+stations (public EPA CASTNet data).
+
+For your thesis, you would:
+
+- summarize regression for quantile-function responses and the SILDOR
+  model
+- build penalized-likelihood counterparts in `refund::pffr()`/`mgcv`
+  (with and without spatial correlation) and compare them with the
+  published SILDOR results and with simpler models
+- study whether the uncertainty statements hold up when, realistically,
+  errors of empirical quantile functions are correlated and much larger
+  in the tails
+- re-analyse the CASTNet data, including a version that keeps the
+  year-to-year variation the paper averages away
+
+Full literature and design details are available on request.
+
 # Topic Area: Network Functional Data
 
 Network functional data arises when functional observations are
@@ -463,6 +522,38 @@ A thesis on this topic would:
   (graph structure; noise; sampling design)
 - compare to baselines (standard FPCA + post-hoc network smoothing;
   independent fits per node) and apply to at least one real dataset
+
+### Topic: Neighbourhood-based principal components for spatial functional data (BA/MA)
+
+When every cell of a spatial grid carries a whole curve (annual
+temperature cycles on an ocean grid, vegetation trajectories from
+satellite images, …), ordinary FPCA ignores that neighbouring curves are
+similar. [Pathmanathan et al. (2026)](https://arxiv.org/abs/2609.14986)
+propose SFGDPC: each curve is reconstructed from a single latent value
+at its own cell and at the neighbouring cells, and the size of the
+neighbourhood is chosen from the data. It builds on the generalized
+dynamic principal components of [Peña & Yohai
+(2016)](https://doi.org/10.1080/01621459.2015.1072542). On its own
+simulation design and on Indian Ocean temperature data it reconstructs
+the data better than spectral spatial FPCA ([Kuenzer, Hörmann &
+Kokoszka, 2021](https://doi.org/10.1080/01621459.2020.1732395)); on a
+stationary benchmark the two are about equal for one component.
+
+For your thesis, you would:
+
+- summarize the method and its relation to spectral spatial FPCA
+- implement it efficiently in `R` for `tf` objects
+- design a *fair* comparison: the published comparisons measure how well
+  each method fits the data it was estimated on, although the methods
+  differ a lot in flexibility. You would add out-of-sample criteria and
+  simple baselines.
+- apply it to real gridded temperature data
+
+An MA thesis would also extend the method to irregularly placed
+locations or general graphs, and/or develop a better criterion for
+choosing the neighbourhood size.
+
+Full literature and design details are available on request.
 
 ### Topic: Network-weighted smoothing for functional data (BA/MA)
 

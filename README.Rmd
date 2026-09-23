@@ -97,6 +97,21 @@ Extensions could include multivariate functional data, adaptive tuning/bandwidth
 
 Estimating covariance functions is a central bottleneck in functional data analysis, especially for prediction, kriging, FPCA, and regression methods that require stable inversion of the covariance operator. A recent proposal by [Naepels & Panaretos (2026)](https://arxiv.org/abs/2604.18229) replaces classical smoothness assumptions by a Markov constraint on the functional covariance structure: for Gaussian processes, Markovianity induces a low-dimensional shape constraint on the covariance kernel and corresponds, on finite grids, to a tridiagonal precision matrix. In this thesis, you would summarize the Markov-transform estimator and its assumptions, implement it for regular and irregular `tf` objects, and benchmark it against empirical, smoothed, and FPCA/PACE-style covariance estimators. A central question would be whether Markov-regularized covariance estimation is useful beyond exactly Markov processes, especially for inverse-covariance-driven tasks such as kriging, curve completion, and prediction from sparse observations. A natural extension would be to develop shrinkage estimators interpolating between a conventional covariance estimator and its Markov projection, allowing a data-adaptive bias--variance tradeoff under model misspecification. The thesis would combine theory, careful `R` implementation, and simulation studies varying sampling density, noise level, degree of Markov misspecification, and downstream task performance.
 
+### Topic: Smooth-and-sparse multivariate FPCA via functional SVD (BA/MA)
+
+Multivariate functional PCA ([Happ & Greven, 2018](https://doi.org/10.1080/01621459.2016.1273115)) summarizes several curves per subject by a few shared components and one score per subject and component. [Zhao et al. (2026)](https://arxiv.org/abs/2609.14815) estimate these components with a penalized SVD and add a new twist: a sparsity penalty that sets the *scores* of some subjects exactly to zero, so that each component describes only the subjects it is relevant for. The method is available in the CRAN package [`ReMFPCA`](https://cran.r-project.org/package=ReMFPCA).
+
+For your thesis, you would:
+
+- summarize the method and how it relates to standard (smoothed) MFPCA
+- make `ReMFPCA` usable with `tf`/`tidyfun` objects and validate the interface
+- test the method in settings the original paper does not cover, in particular when there is no subject group structure for the sparsity to find
+- apply it to a real multivariate functional dataset
+
+An MA thesis would also address open methodological questions, such as how the two penalties should be tuned jointly and how to handle incompletely observed curves.
+
+Full literature and design details are available on request.
+
 ### Topic: Implementing and comparing quantile methods for functional data (BA/MA)
 
 The functional data literature contains many possible definitions of "function-valued quantiles", e.g. [(Arribas-Gil & Romo, 2014)](https://arxiv.org/abs/1306.1718), [(Gijbels & Nagy, 2017)](https://projecteuclid.org/journals/statistical-science/volume-32/issue-4/On-a-General-Definition-of-Depth-for-Functional-Data/10.1214/17-STS625.full). We would pick out some of the most relevant/interesting of these, summarize the relevant theory behind them, implement them for use within `tidyfun`, and perform a comparison based on real and/or synthetic data sets.
@@ -228,6 +243,19 @@ For this thesis, you would:
 - add missing user-facing tooling expected for model objects (`predict`, `resid`, `summary`, diagnostics)
 - benchmark runtime and memory on a large dataset (e.g. German Mouse Clinic ABR curves) and document best practices
 
+## Spatio-temporal regression for distribution-valued responses (MA)
+
+In many monitoring problems the natural response at each site and time is an entire *distribution*, e.g. all weekly pollutant readings at a station in a given month. Representing each distribution by its quantile function turns this into functional regression with a shape constraint: quantile functions must be increasing. [Ghosal, Majumder & Sahoo (2026)](https://arxiv.org/abs/2609.15961) propose a Bayesian model for such responses observed at many sites and repeatedly over time (*spatially-indexed longitudinal distributional outcome regression*, SILDOR). They apply it to nitrate concentrations at 92 US monitoring stations (public EPA CASTNet data).
+
+For your thesis, you would:
+
+- summarize regression for quantile-function responses and the SILDOR model
+- build penalized-likelihood counterparts in `refund::pffr()`/`mgcv` (with and without spatial correlation) and compare them with the published SILDOR results and with simpler models
+- study whether the uncertainty statements hold up when, realistically, errors of empirical quantile functions are correlated and much larger in the tails
+- re-analyse the CASTNet data, including a version that keeps the year-to-year variation the paper averages away
+
+Full literature and design details are available on request.
+
 # Topic Area: Network Functional Data
 
 Network functional data arises when functional observations are associated with nodes in a network (e.g. brain regions, geographic locations, road segments, sensor networks). The goal in these topics is to incorporate network structure into smoothing and/or representation of functional observations.
@@ -243,6 +271,21 @@ A thesis on this topic would:
 - provide a principled tuning strategy (CV or likelihood-style criteria)
 - design simulation experiments that quantify recovery and robustness (graph structure; noise; sampling design)
 - compare to baselines (standard FPCA + post-hoc network smoothing; independent fits per node) and apply to at least one real dataset
+
+### Topic: Neighbourhood-based principal components for spatial functional data (BA/MA)
+
+When every cell of a spatial grid carries a whole curve (annual temperature cycles on an ocean grid, vegetation trajectories from satellite images, ...), ordinary FPCA ignores that neighbouring curves are similar. [Pathmanathan et al. (2026)](https://arxiv.org/abs/2609.14986) propose SFGDPC: each curve is reconstructed from a single latent value at its own cell and at the neighbouring cells, and the size of the neighbourhood is chosen from the data. It builds on the generalized dynamic principal components of [Peña & Yohai (2016)](https://doi.org/10.1080/01621459.2015.1072542). On its own simulation design and on Indian Ocean temperature data it reconstructs the data better than spectral spatial FPCA ([Kuenzer, Hörmann & Kokoszka, 2021](https://doi.org/10.1080/01621459.2020.1732395)); on a stationary benchmark the two are about equal for one component.
+
+For your thesis, you would:
+
+- summarize the method and its relation to spectral spatial FPCA
+- implement it efficiently in `R` for `tf` objects
+- design a *fair* comparison: the published comparisons measure how well each method fits the data it was estimated on, although the methods differ a lot in flexibility. You would add out-of-sample criteria and simple baselines.
+- apply it to real gridded temperature data
+
+An MA thesis would also extend the method to irregularly placed locations or general graphs, and/or develop a better criterion for choosing the neighbourhood size.
+
+Full literature and design details are available on request.
 
 ### Topic: Network-weighted smoothing for functional data (BA/MA)
 
