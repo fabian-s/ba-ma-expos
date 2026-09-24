@@ -2,7 +2,7 @@ Topics for BA or MA Theses
 ================
 Working Group FDA
 
-Last update: 2026-09-23
+Last update: 2026-09-24
 
 Please contact [Fabian
 Scheipl](mailto:fabian.scheipl@stat.uni-muenchen.de) if you’re
@@ -35,6 +35,7 @@ challenging analyses of more complex data sets with advanced methods.
 |                                            | [Conformal prediction bands for functional responses with partial observation](#conformal-prediction-bands-for-functional-responses-with-partial-observation-ma)                                                       | MA           |
 |                                            | [Fast GEE-based inference for large longitudinal functional datasets](#fast-gee-based-inference-for-large-longitudinal-functional-datasets-ma)                                                                         | MA           |
 |                                            | [Spatio-temporal regression for distribution-valued responses](#spatio-temporal-regression-for-distribution-valued-responses-ma)                                                                                       | MA           |
+|                                            | [Density-on-scalar regression with inference for density data](#density-on-scalar-regression-with-inference-for-density-data-ma)                                                                                       | MA           |
 | Network Functional Data                    | [Network-constrained FPCA for functional data on graphs](#topic-network-constrained-fpca-for-functional-data-on-graphs-ma)                                                                                             | MA           |
 |                                            | [Neighbourhood-based principal components for spatial functional data](#topic-neighbourhood-based-principal-components-for-spatial-functional-data-bama)                                                               | BA/MA        |
 |                                            | [Network-weighted smoothing for functional data](#topic-network-weighted-smoothing-for-functional-data-bama)                                                                                                           | BA/MA        |
@@ -293,32 +294,54 @@ ecosystem.
 
 ### Topic: Representation and computation for probability densities in Bayes space (BA, maybe MA)
 
-The *Bayes Space* paradigm developed by v.d. Boogart, Hron, Egozcue and
-others (e.g. [v.d. Boogart et
+The *Bayes Space* paradigm developed by v.d. Boogaart, Hron, Egozcue and
+others (e.g. [v.d. Boogaart et
 al. (2014)](https://onlinelibrary.wiley.com/doi/abs/10.1111/anzs.12074),
 [Hron et al. (2016)](https://doi.org/10.1016/j.csda.2015.07.007))
-provides a way to represent probability measures so that their addition
-and multiplication are well defined, enabling simple summary statistics
-(means etc) as well as methods such as PCA or linear regression for
-probability-density-valued data – i.e. the unit of observation is
-represented by an entire probability distribution, not a single value,
-and the inferential goal is typically to understand how other covariates
-are associated with changes in these distributions. This has many
-interesting applications, for example see [Maier et
-al. (2021)](https://arxiv.org/abs/2110.11771) for differential effects
-of family formation on gender-specific income distributions in East and
-West Germany or [Menafoglio et
+represents probability densities (relative to a reference measure) as
+elements of a vector space, with suitably defined addition
+(“perturbation”) and scalar multiplication (“powering”). This enables
+simple summary statistics (means etc) as well as methods such as PCA or
+linear regression for probability-density-valued data – i.e. the unit of
+observation is represented by an entire probability distribution, not a
+single value, and the inferential goal is typically to understand how
+other covariates are associated with changes in these distributions.
+This has many interesting applications, for example see [Maier et
+al. (2025a)](https://doi.org/10.1214/24-AOAS1979) for the distribution
+of the woman’s share in a couple’s total labor income in East and West
+Germany, or [Menafoglio et
 al. (2021)](https://doi.org/10.1016/j.spasta.2021.100494) for an
-application to groundwater monitoring.  
+application to groundwater chemistry.  
+In practice, densities are usually mapped to ordinary square-integrable
+functions via the centered log-ratio (clr) transformation;
+clr-transformed densities integrate to zero. Spline bases that respect
+this zero-integral constraint (*ZB-splines* or *compositional splines*)
+exist for univariate densities, and [Škorňa et
+al. (2026)](https://doi.org/10.1007/s10260-025-00830-z) extend them to
+*bivariate* densities. A bivariate density can be split into an
+independent part, the product of its two *geometric marginals* (the
+Bayes-space analogue of marginal densities, which in general differ from
+the usual marginals), and an *interactive part* that captures the
+dependence between the two variables [(Hron et al.,
+2023)](https://doi.org/10.1007/s00362-022-01359-z) – loosely similar to
+the separation of marginals and copula. The spline basis of Škorňa et
+al. respects this decomposition.  
 A thesis on this topic would
 
 - summarize the necessary theoretic background and literature
 - implement functionality for `tf` and `tidyfun` that represents density
   data and performs arithmetic operations as well as basic statistics in
-  Bayes space (e.g. also implement suitable ZB-Splines, see [Skorna et
-  al (2024)](https://arxiv.org/pdf/2405.11615)
+  Bayes space, including univariate ZB-splines. An MA thesis could add
+  the bivariate compositional splines of [Škorňa et
+  al. (2026)](https://doi.org/10.1007/s10260-025-00830-z) and their
+  decomposition into geometric marginals and interactive part.
 - apply this to an interesting real-world data set (or: replicate a
   published analysis in this context with the new implementation).
+
+A natural follow-up to this topic is the regression topic
+[Density-on-scalar regression with inference for density
+data](#density-on-scalar-regression-with-inference-for-density-data-ma)
+below.
 
 # Topic Area: Regression Models with/for functional data
 
@@ -482,6 +505,68 @@ For your thesis, you would:
   year-to-year variation the paper averages away
 
 Full literature and design details are available on request.
+
+## Density-on-scalar regression with inference for density data (MA)
+
+*Density-on-scalar regression* models how an entire probability density
+(e.g. the income distribution in a region and year) changes with scalar
+covariates. Formulating the model in a Bayes Hilbert space guarantees
+that fitted and predicted densities are always valid densities, and
+covariate effects become interpretable as multiplicative
+(odds-ratio-type) changes of the density. Two recent approaches by Sonja
+Greven’s group:
+
+- [Maier et al. (2025a)](https://doi.org/10.1214/24-AOAS1979) fit
+  additive models of this kind to *density data*, i.e. when each
+  observation is an (estimated) density, by gradient boosting. This
+  allows many flexible effects and variable selection, but no formal
+  inference.
+- [Maier et al. (2025b, preprint)](https://arxiv.org/abs/2510.14502)
+  instead start from the *individual observations* behind the densities
+  (or binned counts of them) and fit the model by penalized maximum
+  likelihood, with asymptotic theory and confidence regions. This is the
+  more common setting in practice.
+
+When only (pre-smoothed) densities are available, a simpler route is to
+treat the clr-transformed densities as functional responses and fit them
+by penalized least squares, i.e. with a Gaussian *working* likelihood on
+the clr scale (see e.g. [Talská et al.,
+2018](https://doi.org/10.1016/j.csda.2018.01.018)). Combined with the
+mixed-model machinery of `mgcv` / `refund::pffr()`, this would give
+automatic (REML) smoothing parameter selection and confidence intervals
+for effects. However, no readily usable implementation of this
+combination exists yet, and it is not clear how well its uncertainty
+statements hold up.
+
+For your thesis, you would:
+
+- summarize Bayes Hilbert spaces, the clr transformation, and the model
+  classes above
+- implement a zero-integral-constrained (ZB-spline) smooth class for
+  `mgcv` and use it for clr-transformed density responses in `mgcv` /
+  `refund::pffr()`
+- deal with the practical problems of density data: densities must be
+  strictly positive on a bounded support for the clr transformation to
+  work, and the estimation error of the observed densities depends on
+  sample sizes and varies along the support
+- check in simulations (where the densities themselves are estimated
+  from samples) whether the resulting pointwise and simultaneous
+  intervals achieve their nominal coverage, and compare with the
+  approaches of Maier et al. (2025a, b) where feasible
+- apply the method to a real density dataset
+
+For an ambitious thesis, the model could be extended to *bivariate*
+densities with the compositional splines of [Škorňa et
+al. (2026)](https://doi.org/10.1007/s10260-025-00830-z), so that
+covariate effects on the geometric marginals and on the dependence
+structure (the interactive part) can be modelled and tested separately.
+
+Ideally, this would build on or feed into the Bayes-space functionality
+for `tf` / `tidyfun` described in the topic [Representation and
+computation for probability densities in Bayes
+space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma)
+above.  
+This topic would be coordinated with Sonja Greven’s group at HU Berlin.
 
 # Topic Area: Network Functional Data
 
