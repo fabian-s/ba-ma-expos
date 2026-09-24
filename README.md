@@ -30,12 +30,12 @@ challenging analyses of more complex data sets with advanced methods.
 |                                            | [Robust elastic registration of functional data via low-rank SRSF criteria](#topic-robust-elastic-registration-of-functional-data-via-low-rank-srsf-criteria-ma)                                                       | MA           |
 |                                            | [Sobolev-regularized pairwise alignment of functional data](#topic-sobolev-regularized-pairwise-alignment-of-functional-data-ma)                                                                                       | MA           |
 |                                            | [Representation and computation for probability densities in Bayes space](#topic-representation-and-computation-for-probability-densities-in-bayes-space-ba-maybe-ma)                                                  | BA, maybe MA |
-| Regression Models with/for functional data | [Robust hypothesis tests for `pffr()` under within-curve dependence](#robust-hypothesis-tests-for-pffr-under-within-curve-dependence-ma)                                                                               | MA           |
-|                                            | [Validating and extending `fastFMM::fui`](#validating-and-extending-fastfmmfui-ma)                                                                                                                                     | MA           |
-|                                            | [Conformal prediction bands for functional responses with partial observation](#conformal-prediction-bands-for-functional-responses-with-partial-observation-ma)                                                       | MA           |
-|                                            | [Fast GEE-based inference for large longitudinal functional datasets](#fast-gee-based-inference-for-large-longitudinal-functional-datasets-ma)                                                                         | MA           |
-|                                            | [Spatio-temporal regression for distribution-valued responses](#spatio-temporal-regression-for-distribution-valued-responses-ma)                                                                                       | MA           |
-|                                            | [Density-on-scalar regression with inference for density data](#density-on-scalar-regression-with-inference-for-density-data-ma)                                                                                       | MA           |
+| Regression Models with/for functional data | [Robust hypothesis tests for `pffr()` under within-curve dependence](#topic-robust-hypothesis-tests-for-pffr-under-within-curve-dependence-ma)                                                                         | MA           |
+|                                            | [Validating and extending `fastFMM::fui`](#topic-validating-and-extending-fastfmmfui-ma)                                                                                                                               | MA           |
+|                                            | [Conformal prediction bands for functional responses with partial observation](#topic-conformal-prediction-bands-for-functional-responses-with-partial-observation-ma)                                                 | MA           |
+|                                            | [Fast GEE-based inference for large longitudinal functional datasets](#topic-fast-gee-based-inference-for-large-longitudinal-functional-datasets-ma)                                                                   | MA           |
+|                                            | [Spatio-temporal regression for distribution-valued responses](#topic-spatio-temporal-regression-for-distribution-valued-responses-ma)                                                                                 | MA           |
+|                                            | [Density-on-scalar regression with inference for density data](#topic-density-on-scalar-regression-with-inference-for-density-data-ma)                                                                                 | MA           |
 | Network Functional Data                    | [Network-constrained FPCA for functional data on graphs](#topic-network-constrained-fpca-for-functional-data-on-graphs-ma)                                                                                             | MA           |
 |                                            | [Neighbourhood-based principal components for spatial functional data](#topic-neighbourhood-based-principal-components-for-spatial-functional-data-bama)                                                               | BA/MA        |
 |                                            | [Network-weighted smoothing for functional data](#topic-network-weighted-smoothing-for-functional-data-bama)                                                                                                           | BA/MA        |
@@ -340,12 +340,12 @@ A thesis on this topic would
 
 A natural follow-up to this topic is the regression topic
 [Density-on-scalar regression with inference for density
-data](#density-on-scalar-regression-with-inference-for-density-data-ma)
+data](#topic-density-on-scalar-regression-with-inference-for-density-data-ma)
 below.
 
 # Topic Area: Regression Models with/for functional data
 
-## Robust hypothesis tests for `pffr()` under within-curve dependence (MA)
+### Topic: Robust hypothesis tests for `pffr()` under within-curve dependence (MA)
 
 Recent work in this group put point-wise confidence intervals for
 `pffr()` on solid footing: the model-based intervals `pffr()` reports by
@@ -380,7 +380,7 @@ For this thesis, you would:
 
 Full literature and design details are available on request.
 
-## Validating and extending `fastFMM::fui` (MA)
+### Topic: Validating and extending `fastFMM::fui` (MA)
 
 The “Fast Univariate Inference for Longitudinal Functional
 Models”-framework [(Cui et al,
@@ -434,7 +434,7 @@ For this thesis, you could:
   function-on-function setting
 - solve (a subset of) the above tasks to improve the overall toolkit
 
-## Conformal prediction bands for functional responses with partial observation (MA)
+### Topic: Conformal prediction bands for functional responses with partial observation (MA)
 
 Conformal prediction yields distribution-free prediction sets with
 finite-sample coverage. Recent work extends conformal methods to
@@ -459,7 +459,7 @@ For this thesis, you would:
 - demonstrate the method on at least one real longitudinal functional
   dataset
 
-## Fast GEE-based inference for large longitudinal functional datasets (MA)
+### Topic: Fast GEE-based inference for large longitudinal functional datasets (MA)
 
 Generalized Estimating Equations (GEE) provide robust inference for
 correlated/longitudinal data without full likelihood specification.
@@ -478,7 +478,7 @@ For this thesis, you would:
 - benchmark runtime and memory on a large dataset (e.g. German Mouse
   Clinic ABR curves) and document best practices
 
-## Spatio-temporal regression for distribution-valued responses (MA)
+### Topic: Spatio-temporal regression for distribution-valued responses (MA)
 
 In many monitoring problems the natural response at each site and time
 is an entire *distribution*, e.g. all weekly pollutant readings at a
@@ -506,7 +506,7 @@ For your thesis, you would:
 
 Full literature and design details are available on request.
 
-## Density-on-scalar regression with inference for density data (MA)
+### Topic: Density-on-scalar regression with inference for density data (MA)
 
 *Density-on-scalar regression* models how an entire probability density
 (e.g. the income distribution in a region and year) changes with scalar

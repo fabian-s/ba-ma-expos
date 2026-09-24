@@ -163,7 +163,7 @@ For this thesis, you would:
 
 The thesis can be shaped in two directions. A theory-oriented version would focus on understanding the objective functions, the Sobolev geometry of the warp representation, existence and consistency arguments, and the limitations of finite-dimensional approximations. An implementation- and benchmark-oriented version would focus on a stable `R` implementation, careful empirical comparisons, tuning recommendations, and reusable examples for the `tf` / `tidyfun` ecosystem.
 
-### Topic: Representation and computation for probability densities in Bayes space (BA, maybe MA)  
+### Topic: Representation and computation for probability densities in Bayes space (BA, maybe MA)
 
 The *Bayes Space* paradigm developed by v.d. Boogaart, Hron, Egozcue and others
 (e.g. [v.d. Boogaart et al. (2014)](https://onlinelibrary.wiley.com/doi/abs/10.1111/anzs.12074), [Hron et al. (2016)](https://doi.org/10.1016/j.csda.2015.07.007)) represents probability densities (relative to a reference measure) as elements of a vector space, with suitably defined addition ("perturbation") and scalar multiplication ("powering"). This enables simple summary statistics (means etc) as well as methods such as PCA or linear regression for probability-density-valued data -- i.e. the unit of observation is represented by an entire probability distribution, not a single value, and the inferential goal is typically to understand how other covariates are associated with changes in these distributions. This has many interesting applications, for example see [Maier et al. (2025a)](https://doi.org/10.1214/24-AOAS1979) for the distribution of the woman's share in a couple's total labor income in East and West Germany, or [Menafoglio et al. (2021)](https://doi.org/10.1016/j.spasta.2021.100494) for an application to groundwater chemistry.  
@@ -174,12 +174,12 @@ A thesis on this topic would
 - implement functionality for `tf` and  `tidyfun` that represents density data and performs arithmetic operations as well as basic statistics in Bayes space, including univariate ZB-splines. An MA thesis could add the bivariate compositional splines of [Škorňa et al. (2026)](https://doi.org/10.1007/s10260-025-00830-z) and their decomposition into geometric marginals and interactive part.
 - apply this to an interesting real-world data set (or: replicate a published analysis in this context with the new implementation).
 
-A natural follow-up to this topic is the regression topic [Density-on-scalar regression with inference for density data](#density-on-scalar-regression-with-inference-for-density-data-ma) below.
+A natural follow-up to this topic is the regression topic [Density-on-scalar regression with inference for density data](#topic-density-on-scalar-regression-with-inference-for-density-data-ma) below.
 
 
 # Topic Area: Regression Models with/for functional data
 
-## Robust hypothesis tests for `pffr()` under within-curve dependence (MA)
+### Topic: Robust hypothesis tests for `pffr()` under within-curve dependence (MA)
 
 Recent work in this group put point-wise confidence intervals for `pffr()` on solid footing: the model-based intervals `pffr()` reports by default treat every evaluation point of a curve as independent, understating uncertainty whenever curves are dependent within themselves -- the rule, not the exception, in functional data -- and the problem gets worse, not better, as the response grid is refined. A family of cluster-robust sandwich covariances built on the penalized likelihood, now shipped in `refund`, fixes the *interval*. It does nothing for `pffr()`'s significance *tests*: the per-term test `summary.gam()` reports is a quadratic form built from the very covariance block the sandwich work replaces, so it should be too liberal under exactly the same dependence structures that made the old intervals too narrow -- an effect nobody has measured yet.
 
@@ -192,7 +192,7 @@ For this thesis, you would:
 
 Full literature and design details are available on request.
 
-## Validating and extending `fastFMM::fui` (MA)
+### Topic: Validating and extending `fastFMM::fui` (MA)
 
 The "Fast Univariate Inference for Longitudinal Functional Models"-framework [(Cui et al,  2021)](https://doi.org/10.1080/10618600.2021.1950006) is an extremely efficient and powerful approach for large-scale regression models with functional responses. A major recent extension by [Verace, McMahon & Cui (2026)](https://arxiv.org/abs/2605.00765) generalizes this to **function-on-function regression**, where both predictors and responses are functional, while maintaining computational efficiency for longitudinal data.
 
@@ -213,7 +213,7 @@ For this thesis, you could:
 - extend convenience functions and post-processing tools to the function-on-function setting
 - solve (a subset of) the above tasks to improve the overall toolkit 
 
-## Conformal prediction bands for functional responses with partial observation (MA)
+### Topic: Conformal prediction bands for functional responses with partial observation (MA)
 
 Conformal prediction yields distribution-free prediction sets with finite-sample coverage. Recent work extends conformal methods to functional responses and partially observed curves (e.g. [Wang et al., 2025](https://arxiv.org/abs/2502.15000)), but practical challenges remain for partially observed / irregularly sampled curves.
 
@@ -227,7 +227,7 @@ For this thesis, you would:
 - evaluate coverage and efficiency (band width) in simulation under varying sampling designs (sparsity, dropout, irregular grids)
 - demonstrate the method on at least one real longitudinal functional dataset
 
-## Fast GEE-based inference for large longitudinal functional datasets (MA)
+### Topic: Fast GEE-based inference for large longitudinal functional datasets (MA)
 
 Generalized Estimating Equations (GEE) provide robust inference for correlated/longitudinal data without full likelihood specification. Recent work adapts GEE ideas to regression models with functional responses, enabling scalable inference on large datasets.
 
@@ -238,7 +238,7 @@ For this thesis, you would:
 - add missing user-facing tooling expected for model objects (`predict`, `resid`, `summary`, diagnostics)
 - benchmark runtime and memory on a large dataset (e.g. German Mouse Clinic ABR curves) and document best practices
 
-## Spatio-temporal regression for distribution-valued responses (MA)
+### Topic: Spatio-temporal regression for distribution-valued responses (MA)
 
 In many monitoring problems the natural response at each site and time is an entire *distribution*, e.g. all weekly pollutant readings at a station in a given month. Representing each distribution by its quantile function turns this into functional regression with a shape constraint: quantile functions must be increasing. [Ghosal, Majumder & Sahoo (2026)](https://arxiv.org/abs/2609.15961) propose a Bayesian model for such responses observed at many sites and repeatedly over time (*spatially-indexed longitudinal distributional outcome regression*, SILDOR). They apply it to nitrate concentrations at 92 US monitoring stations (public EPA CASTNet data).
 
@@ -251,7 +251,7 @@ For your thesis, you would:
 
 Full literature and design details are available on request.
 
-## Density-on-scalar regression with inference for density data (MA)
+### Topic: Density-on-scalar regression with inference for density data (MA)
 
 *Density-on-scalar regression* models how an entire probability density (e.g. the income distribution in a region and year) changes with scalar covariates. Formulating the model in a Bayes Hilbert space guarantees that fitted and predicted densities are always valid densities, and covariate effects become interpretable as multiplicative (odds-ratio-type) changes of the density. Two recent approaches by Sonja Greven's group:
 
@@ -335,7 +335,7 @@ A thesis on this topic would:
 [`manifun`](https://github.com/HerrMo/manifun) is a small, unpublished `R` package for dimension reduction and embedding visualization (primarily) for functional data. Possible tasks include implementing suitable interfaces to `mlr3` and/or [`tidyfun`](https://github.com/tidyfun/tidyfun). 
 *Implementing AUMVC framework* could be included in this topic area as well. 
 
-### Topic:  Improved interactive visualization of functional data embeddings (MA)
+### Topic: Improved interactive visualization of functional data embeddings (MA)
 
 The central goal of the project is to improve existing and implement new embedding (i.e. dimension reduction) visualization approaches. Fairly flexible, interactive versions of the kind of visualization shown below: 
 ![](images/paste-B407D3ED.png)
