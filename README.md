@@ -382,57 +382,53 @@ Full literature and design details are available on request.
 
 ### Topic: Validating and extending `fastFMM::fui` (MA)
 
-The “Fast Univariate Inference for Longitudinal Functional
-Models”-framework [(Cui et al,
-2021)](https://doi.org/10.1080/10618600.2021.1950006) is an extremely
-efficient and powerful approach for large-scale regression models with
-functional responses. A major recent extension by [Verace, McMahon & Cui
-(2026)](https://arxiv.org/abs/2605.00765) generalizes this to
-**function-on-function regression**, where both predictors and responses
-are functional, while maintaining computational efficiency for
-longitudinal data.
+Fast univariate inference (FUI) [(Cui et al.,
+2022)](https://doi.org/10.1080/10618600.2021.1950006) fits pointwise
+mixed models for longitudinal functional responses, smooths the
+coefficient estimates, and constructs analytic or bootstrap confidence
+bands. The current [`fastFMM`](https://cran.r-project.org/package=fastFMM)
+also supports *concurrent* functional covariates: a predictor measured at
+response coordinate $s$ acts on the response at the same $s$ [(Xin et al.,
+2026)](https://elifesciences.org/reviewed-preprints/109428v1). [Verace,
+McMahon & Cui (2026)](https://arxiv.org/abs/2605.00765) developed the
+more general longitudinal function-on-function model with an integral
+effect $\int W(u)\gamma(s,u)\,du$ and have already released its [ELFFR
+implementation](https://github.com/leif-verace/ELFFR).
 
-The current implementation in `fastFMM` offers several natural extension
-directions in light of this advance:
+The thesis would **validate the current `fui` implementation and add an
+uncertainty-aware second-stage smoother**:
 
-1.  Only *linear effects of scalar covariates* - nonlinear effects are a
-    fairly straightforward extension.
-2.  The original `fui` framework handles *functional covariates that are
-    measured concurrently with the response*, making restrictive
-    assumptions about functional covariates being measured at the same
-    times as responses and only associated pointwise. The new
-    function-on-function framework may enable more flexible concurrent
-    and lagged functional covariate effects.
-3.  *Domain selection* for functional effects (i.e. shrinking
-    coefficient functions to 0 across parts of the domain) could be
-    added to improve interpretability and parsimony of the fitted
-    models.
-4.  Only *functional responses on regular, common grids* are currently
-    possible – a Master’s thesis could set up some simulation
-    experiments to investigate to what extent this requirement can be
-    loosened, e.g. by interpolating or binning irregularly measured
-    functional responses in a pre-processing step to turn them into
-    functional data on a regular grid.
-5.  The current version *does not handle non-equidistant grids* for the
-    functional responses correctly. Adding this seems straightforward –
-    simply hand over suitable argument values to the second smoothing
-    step of the algorithm.
-6.  The current version *does not implement convenience functions* like
-    `predict`, `resid`, `summary` etc that users rely on for quick
-    post-processing (model diagnostics, evaluation, etc) – these should
-    be added.
+- implement a penalized spline smoother that weights each raw pointwise
+  coefficient estimate by the inverse of its estimated **variance**,
+  with safeguards for unstable standard errors. Compare it with the
+  current unweighted smoother under constant and varying pointwise
+  precision;
+- evaluate point estimates, pointwise intervals, and simultaneous bands
+  from Gaussian analytic and subject-level bootstrap inference under
+  varying numbers of subjects and visits, coefficient shapes,
+  within-curve dependence, and response-grid resolution. Analytic
+  covariance must be propagated through the weighted smoother;
+  bootstrap replicates must re-estimate the weights;
+- study computation time and memory use, with a matched `refund::pffr`
+  comparison on a manageable subset of settings;
+- audit how `fui` uses response-grid coordinates: the [current
+  manual](https://stat.ethz.ch/CRAN/web/packages/fastFMM/refman/fastFMM.html)
+  supports supplied `argvals` for bootstrap inference but not for its
+  analytic path. If time and the covariance calculations permit, extend
+  that path to a **shared, non-equidistant grid**;
+- document the results in a reproducible simulation study and one
+  real-data application.
 
-For this thesis, you could:
-
-- implement the fast function-on-function regression framework from
-  Verace et al. (2026) for `fastFMM`, extending `fui` to handle
-  functional predictors efficiently
-- benchmark the new function-on-function approach against existing
-  methods (e.g. `refund::pffr`, direct tensor decomposition approaches)
-  on realistic longitudinal functional data
-- extend convenience functions and post-processing tools to the
-  function-on-function setting
-- solve (a subset of) the above tasks to improve the overall toolkit
+Different observation grids for individual subjects would require
+additional modelling or preprocessing and are outside this core scope.
+*Domain selection* also needs a precise target: zero intervals of a
+scalar predictor’s coefficient curve $\beta(s)$ differ from zero regions
+of a function-on-function coefficient surface $\gamma(s,u)$. Both have
+existing methods, including [Wang et al.
+(2023)](https://doi.org/10.1111/biom.13684) and [Bernardi, Canale &
+Stefanucci (2023)](https://doi.org/10.1080/10618600.2022.2130926); it
+would be a separate, more specialized extension rather than the starting
+point of this thesis.
 
 ### Topic: Conformal prediction bands for functional responses with partial observation (MA)
 
